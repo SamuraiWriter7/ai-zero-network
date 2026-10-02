@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "22222222-2222-4222-8222-222222222222",
+  "requester_id": "agent-reader-001",
+  "issuer_id": "policy-engine-001",
+  "subject_id": "agent-reader-001",
+  "scope": [
+    "read:document"
+  ],
+  "decision": "allow",
+  "source_type": "policy",
+  "issued_at": "2026-10-03T04:31:00+09:00",
+  "expires_at": null,
+  "revoked_at": null,
+  "delegation_parent": null
+}
