@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.1",
+  "receipt_id": "8c827c61-c027-4f90-b801-451ec1bf07bb",
+  "trace_id": "650e8400-e29b-41d4-a716-446655440002",
+  "agent_id": "agent-tool-002",
+  "action": "write_external_record",
+  "authority_used": [
+    "write:document"
+  ],
+  "resources": {
+    "tokens": 128,
+    "cost": 0.002,
+    "compute_units": 1.5
+  },
+  "result_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "prev_receipt_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "signature": "example-signature-v0.1",
+  "timestamp": "2026-10-03T01:13:00+09:00"
+}
