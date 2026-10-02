@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1",
+  "receipt_id": "7b716b50-bf16-4e8f-a7f0-340db0ae9610",
+  "trace_id": "550e8400-e29b-41d4-a716-446655440020",
+  "agent_id": "agent-finance-002",
+  "action": "submit_external_order",
+  "authority_used": [],
+  "timestamp": "2026-10-03T01:30:00+09:00"
+}
