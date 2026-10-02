@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "33333333-3333-4333-8333-333333333333",
+  "requester_id": "agent-tool-001",
+  "issuer_id": "auth-service-001",
+  "subject_id": "agent-tool-001",
+  "scope": [
+    "execute:tool",
+    "read:resource"
+  ],
+  "decision": "allow",
+  "source_type": "service",
+  "issued_at": "2026-10-03T04:32:00+09:00",
+  "expires_at": "2026-10-03T04:42:00+09:00",
+  "revoked_at": null,
+  "delegation_parent": null
+}
