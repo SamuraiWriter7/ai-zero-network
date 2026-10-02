@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "trace_id": "550e8400-e29b-41d4-a716-446655440001",
+  "parent_trace_id": "550e8400-e29b-41d4-a716-446655440000",
+  "agent_id": "agent-finance-001",
+  "region": "finance-01",
+  "timestamp": "2026-10-03T01:11:00+09:00",
+  "type": "authority_request",
+  "summary": "Requested authority to submit an external order.",
+  "payload_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "risk_score": 0.32
+}
