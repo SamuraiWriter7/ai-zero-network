@@ -1,0 +1,31 @@
+{
+  "participant": {
+    "agent_id": "agent-finance-002"
+  },
+  "traces": [
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440201",
+      "agent_id": "agent-finance-002",
+      "timestamp": "2026-10-03T01:45:00+09:00",
+      "type": "authority_request"
+    },
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440202",
+      "parent_trace_id": "550e8400-e29b-41d4-a716-446655440201",
+      "agent_id": "agent-finance-002",
+      "timestamp": "2026-10-03T01:45:02+09:00",
+      "type": "authority_denied"
+    }
+  ],
+  "authority_events": [
+    {
+      "authority_id": "auth-002",
+      "agent_id": "agent-finance-002",
+      "scope": "write:order",
+      "decision": "deny",
+      "timestamp": "2026-10-03T01:45:01+09:00"
+    }
+  ],
+  "actions": [],
+  "receipts": []
+}
