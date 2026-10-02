@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ai-zero-network/schemas/trace-v0.1.schema.json",
+  "title": "AI Zero Network Trace v0.1",
+  "description": "Schema for observable Trace events in AI Zero Network v0.1. A Trace records an externally relevant event or state transition without requiring disclosure of private chain-of-thought.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "trace_id",
+    "agent_id",
+    "timestamp",
+    "type"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+
+    "trace_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this Trace event."
+    },
+
+    "parent_trace_id": {
+      "description": "Identifier of the immediately preceding causal Trace, if one exists.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+
+    "agent_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Unique identifier of the participant that emitted the Trace."
+    },
+
+    "region": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Optional logical observation region or network zone."
+    },
+
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time at which the observable event occurred."
+    },
+
+    "type": {
+      "type": "string",
+      "enum": [
+        "decision",
+        "message",
+        "tool_call",
+        "authority_request",
+        "authority_denied",
+        "action_requested",
+        "action_completed",
+        "error",
+        "state_transition"
+      ],
+      "description": "Externally relevant event category."
+    },
+
+    "summary": {
+      "type": "string",
+      "maxLength": 2048,
+      "description": "Short externally observable description of the event. Must not require private chain-of-thought."
+    },
+
+    "payload_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "SHA-256 digest of the associated payload, represented as 64 hexadecimal characters."
+    },
+
+    "risk_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Optional implementation-defined risk estimate from 0.0 to 1.0."
+    }
+  }
+}
