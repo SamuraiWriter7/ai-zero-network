@@ -1,0 +1,52 @@
+{
+  "participant": {
+    "agent_id": "agent-finance-001"
+  },
+  "traces": [
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440101",
+      "agent_id": "agent-finance-001",
+      "timestamp": "2026-10-03T01:40:00+09:00",
+      "type": "authority_request"
+    },
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440102",
+      "parent_trace_id": "550e8400-e29b-41d4-a716-446655440101",
+      "agent_id": "agent-finance-001",
+      "timestamp": "2026-10-03T01:40:03+09:00",
+      "type": "action_completed"
+    }
+  ],
+  "authority_events": [
+    {
+      "authority_id": "auth-001",
+      "agent_id": "agent-finance-001",
+      "scope": "write:order",
+      "decision": "allow",
+      "timestamp": "2026-10-03T01:40:01+09:00"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "action-001",
+      "agent_id": "agent-finance-001",
+      "trace_id": "550e8400-e29b-41d4-a716-446655440102",
+      "action": "submit_external_order",
+      "required_scope": "write:order",
+      "status": "success",
+      "timestamp": "2026-10-03T01:40:02+09:00"
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "7b716b50-bf16-4e8f-a7f0-340db0ae9701",
+      "trace_id": "550e8400-e29b-41d4-a716-446655440102",
+      "agent_id": "agent-finance-001",
+      "action": "submit_external_order",
+      "authority_used": [
+        "write:order"
+      ],
+      "timestamp": "2026-10-03T01:40:03+09:00"
+    }
+  ]
+}
