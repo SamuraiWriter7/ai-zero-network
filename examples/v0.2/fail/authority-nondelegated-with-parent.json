@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee",
+  "requester_id": "agent-a",
+  "issuer_id": "human-admin-002",
+  "subject_id": "agent-a",
+  "scope": [
+    "write:document"
+  ],
+  "decision": "allow",
+  "source_type": "human",
+  "issued_at": "2026-10-03T04:45:00+09:00",
+  "delegation_parent": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"
+}
