@@ -1,0 +1,7 @@
+{
+  "schema_version": "0.1",
+  "trace_id": "550e8400-e29b-41d4-a716-446655440000",
+  "agent_id": "agent-observer-001",
+  "timestamp": "2026-10-03T01:10:00+09:00",
+  "type": "state_transition"
+}
