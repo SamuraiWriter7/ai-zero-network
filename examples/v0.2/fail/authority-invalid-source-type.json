@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "88888888-8888-4888-8888-888888888888",
+  "requester_id": "agent-a",
+  "issuer_id": "unknown-source-001",
+  "subject_id": "agent-a",
+  "scope": [
+    "read:document"
+  ],
+  "decision": "allow",
+  "source_type": "autonomous",
+  "issued_at": "2026-10-03T04:43:00+09:00"
+}
