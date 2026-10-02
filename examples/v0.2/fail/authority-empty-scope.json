@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "66666666-6666-4666-8666-666666666666",
+  "requester_id": "agent-a",
+  "issuer_id": "human-admin-001",
+  "subject_id": "agent-a",
+  "scope": [],
+  "decision": "allow",
+  "source_type": "human",
+  "issued_at": "2026-10-03T04:41:00+09:00"
+}
