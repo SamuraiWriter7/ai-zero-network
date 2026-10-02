@@ -1,0 +1,41 @@
+{
+  "participant": {
+    "agent_id": "agent-tool-001"
+  },
+  "traces": [
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440301",
+      "agent_id": "agent-tool-001",
+      "timestamp": "2026-10-03T01:50:00+09:00",
+      "type": "action_requested"
+    },
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440302",
+      "parent_trace_id": "550e8400-e29b-41d4-a716-446655440301",
+      "agent_id": "agent-tool-001",
+      "timestamp": "2026-10-03T01:50:03+09:00",
+      "type": "error"
+    }
+  ],
+  "authority_events": [
+    {
+      "authority_id": "auth-003",
+      "agent_id": "agent-tool-001",
+      "scope": "write:document",
+      "decision": "allow",
+      "timestamp": "2026-10-03T01:50:01+09:00"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "action-003",
+      "agent_id": "agent-tool-001",
+      "trace_id": "550e8400-e29b-41d4-a716-446655440301",
+      "action": "write_external_record",
+      "required_scope": "write:document",
+      "status": "failed",
+      "timestamp": "2026-10-03T01:50:02+09:00"
+    }
+  ],
+  "receipts": []
+}
