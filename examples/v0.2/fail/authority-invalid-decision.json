@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "77777777-7777-4777-8777-777777777777",
+  "requester_id": "agent-a",
+  "issuer_id": "policy-engine-001",
+  "subject_id": "agent-a",
+  "scope": [
+    "read:document"
+  ],
+  "decision": "pending",
+  "source_type": "policy",
+  "issued_at": "2026-10-03T04:42:00+09:00"
+}
