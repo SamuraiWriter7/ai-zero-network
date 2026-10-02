@@ -1,0 +1,34 @@
+{
+  "participant": {
+    "agent_id": "agent-a"
+  },
+  "traces": [
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440701",
+      "agent_id": "agent-a",
+      "timestamp": "2026-10-03T02:20:00+09:00",
+      "type": "action_completed"
+    }
+  ],
+  "authority_events": [
+    {
+      "authority_id": "auth-107",
+      "agent_id": "agent-a",
+      "scope": "write:document",
+      "decision": "allow",
+      "timestamp": "2026-10-03T02:19:59+09:00"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "action-107",
+      "agent_id": "agent-a",
+      "trace_id": "550e8400-e29b-41d4-a716-446655440701",
+      "action": "write_external_record",
+      "required_scope": "write:document",
+      "status": "success",
+      "timestamp": "2026-10-03T02:20:00+09:00"
+    }
+  ],
+  "receipts": []
+}
