@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "receipt_id": "7b716b50-bf16-4e8f-a7f0-340db0ae9612",
+  "trace_id": "550e8400-e29b-41d4-a716-446655440021",
+  "agent_id": "agent-tool-004",
+  "action": "write_external_record",
+  "authority_used": [
+    "write:document"
+  ],
+  "result_hash": "not-a-valid-sha256",
+  "timestamp": "2026-10-03T01:32:00+09:00"
+}
