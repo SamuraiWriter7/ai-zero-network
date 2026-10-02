@@ -1,0 +1,10 @@
+{
+  "schema_version": "0.1",
+  "receipt_id": "7b716b50-bf16-4e8f-a7f0-340db0ae9611",
+  "agent_id": "agent-tool-003",
+  "action": "write_external_record",
+  "authority_used": [
+    "write:document"
+  ],
+  "timestamp": "2026-10-03T01:31:00+09:00"
+}
