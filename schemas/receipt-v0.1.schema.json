@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ai-zero-network/schemas/receipt-v0.1.schema.json",
+  "title": "AI Zero Network Receipt v0.1",
+  "description": "Schema for Receipts in AI Zero Network v0.1. A Receipt records a successfully completed externally effective action performed under validated authority.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "receipt_id",
+    "trace_id",
+    "agent_id",
+    "action",
+    "authority_used",
+    "timestamp"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.1"
+    },
+
+    "receipt_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this Receipt."
+    },
+
+    "trace_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the Trace associated with the externally effective action."
+    },
+
+    "agent_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Unique identifier of the participant that performed the action."
+    },
+
+    "action": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "description": "Short identifier or description of the externally effective action that actually occurred."
+    },
+
+    "authority_used": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Authority scopes actually used to perform the action.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional resources consumed by the action.",
+      "properties": {
+        "tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of model tokens consumed, if measured."
+        },
+
+        "cost": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Implementation-defined monetary or accounting cost."
+        },
+
+        "compute_units": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Optional implementation-defined compute consumption."
+        }
+      }
+    },
+
+    "result_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "SHA-256 digest of the resulting externally observable output or state representation."
+    },
+
+    "prev_receipt_hash": {
+      "description": "SHA-256 digest linking this Receipt to a preceding Receipt, or null when no predecessor exists.",
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+
+    "signature": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192,
+      "description": "Optional cryptographic signature, attestation, or equivalent integrity proof."
+    },
+
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time at which the externally effective action successfully completed."
+    }
+  }
+}
