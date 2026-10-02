@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1",
+  "trace_id": "550e8400-e29b-41d4-a716-446655440012",
+  "agent_id": "agent-test-002",
+  "timestamp": "2026-10-03T01:22:00+09:00",
+  "type": "tool_call",
+  "risk_score": 1.4
+}
