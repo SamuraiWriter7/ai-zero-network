@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ai-zero-network/schemas/authority-v0.2.schema.json",
+  "title": "AI Zero Network Authority v0.2",
+  "description": "Schema for authority provenance records in AI Zero Network v0.2. An Authority Record identifies who requested authority, who issued it, who may use it, its scope, lifecycle, and optional delegation parent.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "authority_id",
+    "requester_id",
+    "issuer_id",
+    "subject_id",
+    "scope",
+    "decision",
+    "source_type",
+    "issued_at"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.2"
+    },
+
+    "authority_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this Authority Record."
+    },
+
+    "requester_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Identifier of the participant that requested the authority."
+    },
+
+    "issuer_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Identifier of the authority source that issued the decision."
+    },
+
+    "subject_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Identifier of the participant permitted to use this authority."
+    },
+
+    "scope": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Authority scopes granted or denied by this record.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      }
+    },
+
+    "decision": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny"
+      ],
+      "description": "Authorization decision represented by this record."
+    },
+
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "human",
+        "policy",
+        "service",
+        "delegated"
+      ],
+      "description": "Type of authority source."
+    },
+
+    "issued_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time at which this Authority Record was issued."
+    },
+
+    "expires_at": {
+      "description": "Optional time after which the authority may no longer authorize new actions.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+
+    "revoked_at": {
+      "description": "Optional time at which the authority was revoked before natural expiration.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+
+    "delegation_parent": {
+      "description": "Authority Record from which this authority was delegated, or null for non-delegated authority.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uuid"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "source_type": {
+            "const": "delegated"
+          }
+        },
+        "required": [
+          "source_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "delegation_parent"
+        ],
+        "properties": {
+          "delegation_parent": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source_type": {
+            "enum": [
+              "human",
+              "policy",
+              "service"
+            ]
+          }
+        },
+        "required": [
+          "source_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "delegation_parent": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}
