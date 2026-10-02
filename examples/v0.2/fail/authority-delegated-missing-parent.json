@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2",
+  "authority_id": "99999999-9999-4999-8999-999999999999",
+  "requester_id": "agent-worker-002",
+  "issuer_id": "agent-coordinator-002",
+  "subject_id": "agent-worker-002",
+  "scope": [
+    "read:document"
+  ],
+  "decision": "allow",
+  "source_type": "delegated",
+  "issued_at": "2026-10-03T04:44:00+09:00"
+}
