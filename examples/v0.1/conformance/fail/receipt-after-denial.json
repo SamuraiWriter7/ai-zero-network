@@ -1,0 +1,35 @@
+{
+  "participant": {
+    "agent_id": "agent-a"
+  },
+  "traces": [
+    {
+      "trace_id": "550e8400-e29b-41d4-a716-446655440601",
+      "agent_id": "agent-a",
+      "timestamp": "2026-10-03T02:15:00+09:00",
+      "type": "authority_denied"
+    }
+  ],
+  "authority_events": [
+    {
+      "authority_id": "auth-106",
+      "agent_id": "agent-a",
+      "scope": "write:document",
+      "decision": "deny",
+      "timestamp": "2026-10-03T02:15:01+09:00"
+    }
+  ],
+  "actions": [],
+  "receipts": [
+    {
+      "receipt_id": "7b716b50-bf16-4e8f-a7f0-340db0ae9804",
+      "trace_id": "550e8400-e29b-41d4-a716-446655440601",
+      "agent_id": "agent-a",
+      "action": "write_external_record",
+      "authority_used": [
+        "write:document"
+      ],
+      "timestamp": "2026-10-03T02:15:02+09:00"
+    }
+  ]
+}
