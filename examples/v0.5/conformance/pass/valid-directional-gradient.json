@@ -1,0 +1,19 @@
+{
+  "gradients": [
+    {
+      "schema_version": "0.5",
+      "gradient_id": "22222222-aaaa-4222-8222-222222222222",
+      "boundary_id": "research-01__tooling-01",
+      "region_a": "research-01",
+      "region_b": "tooling-01",
+      "metric": "authority_friction",
+      "value_a": 0.28,
+      "value_b": 0.61,
+      "gradient": -0.33,
+      "method": "directional_difference",
+      "window_start": "2026-10-04T03:10:00+09:00",
+      "window_end": "2026-10-04T03:15:00+09:00"
+    }
+  ],
+  "front_candidates": []
+}
