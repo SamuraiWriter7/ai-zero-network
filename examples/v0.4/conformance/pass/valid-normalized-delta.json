@@ -1,0 +1,50 @@
+{
+  "snapshots": [
+    {
+      "snapshot_id": "66666666-aaaa-4666-8666-666666666666",
+      "region": "tooling-01",
+      "window_start": "2026-10-04T02:00:00+09:00",
+      "window_end": "2026-10-04T02:05:00+09:00",
+      "observations": {
+        "trace_count": 100,
+        "receipt_count": 10,
+        "authority_request_count": 6,
+        "authority_grant_count": 4,
+        "authority_deny_count": 2,
+        "active_agent_count": 12
+      }
+    },
+    {
+      "snapshot_id": "77777777-aaaa-4777-8777-777777777777",
+      "region": "tooling-01",
+      "window_start": "2026-10-04T02:05:00+09:00",
+      "window_end": "2026-10-04T02:15:00+09:00",
+      "observations": {
+        "trace_count": 220,
+        "receipt_count": 24,
+        "authority_request_count": 14,
+        "authority_grant_count": 10,
+        "authority_deny_count": 4,
+        "active_agent_count": 18
+      }
+    }
+  ],
+  "field_deltas": [
+    {
+      "delta_id": "cccccccc-3333-4333-8333-cccccccccccc",
+      "region": "tooling-01",
+      "from_snapshot": "66666666-aaaa-4666-8666-666666666666",
+      "to_snapshot": "77777777-aaaa-4777-8777-777777777777",
+      "changes": {
+        "trace_count": 120,
+        "receipt_count": 14
+      },
+      "comparison": {
+        "window_compatibility": "normalized",
+        "normalization_method": "per_minute_rate_v1",
+        "delta_state": "complete"
+      }
+    }
+  ],
+  "region_flows": []
+}
