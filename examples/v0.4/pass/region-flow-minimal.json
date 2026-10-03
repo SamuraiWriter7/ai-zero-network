@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.4",
+  "flow_id": "33333333-3333-4333-8333-333333333333",
+  "source_region": "finance-01",
+  "target_region": "payment-01",
+  "window_start": "2026-10-04T01:00:00+09:00",
+  "window_end": "2026-10-04T01:05:00+09:00",
+  "observations": {
+    "trace_count": 48,
+    "receipt_count": 9
+  }
+}
