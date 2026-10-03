@@ -1,0 +1,54 @@
+{
+  "circulations": [
+    {
+      "circulation_id": "44444444-aaaa-4444-8444-444444444444",
+      "window_start": "2026-10-04T07:30:00+09:00",
+      "window_end": "2026-10-04T07:35:00+09:00",
+      "region_refs": [
+        "agent-a",
+        "agent-b",
+        "agent-c"
+      ],
+      "cycle_count": 9,
+      "return_count": 14
+    }
+  ],
+  "vortex_candidates": [
+    {
+      "candidate_id": "eeeeeeee-2222-4222-8222-eeeeeeeeeeee",
+      "circulation_refs": [
+        "44444444-aaaa-4444-8444-444444444444"
+      ],
+      "classification": "vortex_candidate",
+      "method": "multi_signal_vortex_candidate_v1",
+      "window_start": "2026-10-04T07:30:00+09:00",
+      "window_end": "2026-10-04T07:35:00+09:00",
+      "weights": {
+        "cycle_count": 0.25,
+        "return_count": 0.25,
+        "cycle_density": 0.25,
+        "circulation_strength": 0.25
+      },
+      "signals": {
+        "cycle_count": 0.8,
+        "return_count": 0.7,
+        "cycle_density": 0.6,
+        "circulation_strength": 0.5
+      },
+      "score": 0.65,
+      "core_regions": [
+        "agent-a",
+        "agent-b",
+        "agent-c"
+      ],
+      "provenance": {
+        "generated_at": "2026-10-04T07:35:02+09:00",
+        "analyzer_id": "vortex-analyzer-01",
+        "source_circulation_refs": [
+          "44444444-aaaa-4444-8444-444444444444"
+        ],
+        "source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ]
+}
