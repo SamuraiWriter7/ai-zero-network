@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "33333333-aaaa-4333-8333-333333333333",
+  "region": "research-01",
+  "window_start": "2026-10-03T10:20:00+09:00",
+  "window_end": "2026-10-03T10:25:00+09:00",
+  "observations": {
+    "trace_count": 120,
+    "receipt_count": 8,
+    "authority_request_count": 14,
+    "authority_grant_count": 6,
+    "authority_deny_count": 8,
+    "active_agent_count": 17
+  },
+  "derived": {
+    "authority_friction": {
+      "value": 0.5714285714,
+      "method": "deny_count/request_count"
+    }
+  }
+}
