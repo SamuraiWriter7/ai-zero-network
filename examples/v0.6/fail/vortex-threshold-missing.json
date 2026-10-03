@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.6",
+  "candidate_id": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+  "circulation_refs": [
+    "22222222-2222-4222-8222-222222222222"
+  ],
+  "classification": "vortex_candidate",
+  "method": "cycle_density_threshold_v1",
+  "window_start": "2026-10-04T07:10:00+09:00",
+  "window_end": "2026-10-04T07:15:00+09:00"
+}
