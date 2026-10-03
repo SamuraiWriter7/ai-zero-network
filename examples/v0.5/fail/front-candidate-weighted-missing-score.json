@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.5",
+  "candidate_id": "cccccccc-3333-4333-8333-cccccccccccc",
+  "boundary_id": "research-01__tooling-01",
+  "region_a": "research-01",
+  "region_b": "tooling-01",
+  "gradient_refs": [
+    "55555555-5555-4555-8555-555555555555"
+  ],
+  "classification": "front_candidate",
+  "method": "gradient_weighted_score_v1",
+  "window_start": "2026-10-04T04:10:00+09:00",
+  "window_end": "2026-10-04T04:15:00+09:00",
+  "weights": {
+    "activity_pressure": 1.0
+  }
+}
