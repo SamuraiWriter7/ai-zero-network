@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "66666666-6666-4666-8666-666666666666",
+  "region": "finance-02",
+  "window_start": "2026-10-03T10:30:00+09:00",
+  "window_end": "2026-10-03T10:35:00+09:00",
+  "observations": {
+    "trace_count": -1,
+    "receipt_count": 0,
+    "authority_request_count": 0,
+    "authority_grant_count": 0,
+    "authority_deny_count": 0,
+    "active_agent_count": 1
+  }
+}
