@@ -1,0 +1,11 @@
+{
+  "schema_version": "0.4",
+  "delta_id": "66666666-6666-4666-8666-666666666666",
+  "region": "research-02",
+  "from_snapshot": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "to_snapshot": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "changes": {
+    "trace_count": 25,
+    "activity_pressure": 0.77
+  }
+}
