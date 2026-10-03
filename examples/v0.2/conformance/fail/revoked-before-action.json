@@ -1,0 +1,41 @@
+{
+  "participants": [
+    {
+      "agent_id": "agent-a"
+    },
+    {
+      "agent_id": "human-admin-001"
+    }
+  ],
+  "authorities": [
+    {
+      "authority_id": "99999999-9999-4999-8999-999999999999",
+      "requester_id": "agent-a",
+      "issuer_id": "human-admin-001",
+      "subject_id": "agent-a",
+      "scope": [
+        "write:document"
+      ],
+      "decision": "allow",
+      "source_type": "human",
+      "issued_at": "2026-10-03T08:00:00+09:00",
+      "expires_at": "2026-10-03T10:00:00+09:00",
+      "revoked_at": "2026-10-03T08:20:00+09:00",
+      "delegation_parent": null
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "action-102",
+      "agent_id": "agent-a",
+      "action": "write_external_record",
+      "required_scope": "write:document",
+      "authority_refs": [
+        "99999999-9999-4999-8999-999999999999"
+      ],
+      "status": "success",
+      "timestamp": "2026-10-03T08:30:00+09:00"
+    }
+  ],
+  "receipts": []
+}
