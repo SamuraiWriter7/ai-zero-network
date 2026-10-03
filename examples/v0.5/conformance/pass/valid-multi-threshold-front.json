@@ -1,0 +1,54 @@
+{
+  "gradients": [
+    {
+      "schema_version": "0.5",
+      "gradient_id": "44444444-aaaa-4444-8444-444444444444",
+      "boundary_id": "finance-01__safety-01",
+      "region_a": "finance-01",
+      "region_b": "safety-01",
+      "metric": "activity_pressure",
+      "value_a": 0.86,
+      "value_b": 0.34,
+      "gradient": 0.52,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T03:30:00+09:00",
+      "window_end": "2026-10-04T03:35:00+09:00"
+    },
+    {
+      "schema_version": "0.5",
+      "gradient_id": "55555555-aaaa-4555-8555-555555555555",
+      "boundary_id": "finance-01__safety-01",
+      "region_a": "finance-01",
+      "region_b": "safety-01",
+      "metric": "authority_friction",
+      "value_a": 0.12,
+      "value_b": 0.76,
+      "gradient": 0.64,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T03:30:00+09:00",
+      "window_end": "2026-10-04T03:35:00+09:00"
+    }
+  ],
+  "front_candidates": [
+    {
+      "schema_version": "0.5",
+      "candidate_id": "bbbbbbbb-2222-4222-8222-bbbbbbbbbbbb",
+      "boundary_id": "finance-01__safety-01",
+      "region_a": "finance-01",
+      "region_b": "safety-01",
+      "gradient_refs": [
+        "44444444-aaaa-4444-8444-444444444444",
+        "55555555-aaaa-4555-8555-555555555555"
+      ],
+      "classification": "front_candidate",
+      "method": "multi_metric_threshold_v1",
+      "window_start": "2026-10-04T03:30:00+09:00",
+      "window_end": "2026-10-04T03:35:00+09:00",
+      "thresholds": {
+        "activity_pressure": 0.5,
+        "authority_friction": 0.6
+      },
+      "candidate_state": "complete"
+    }
+  ]
+}
