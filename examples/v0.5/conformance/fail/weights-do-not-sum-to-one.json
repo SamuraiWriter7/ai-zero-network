@@ -1,0 +1,38 @@
+{
+  "gradients": [
+    {
+      "schema_version": "0.5",
+      "gradient_id": "ffffffff-aaaa-4fff-8fff-ffffffffffff",
+      "boundary_id": "research-01__tooling-01",
+      "region_a": "research-01",
+      "region_b": "tooling-01",
+      "metric": "activity_pressure",
+      "value_a": 0.9,
+      "value_b": 0.3,
+      "gradient": 0.6,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T05:00:00+09:00",
+      "window_end": "2026-10-04T05:05:00+09:00"
+    }
+  ],
+  "front_candidates": [
+    {
+      "schema_version": "0.5",
+      "candidate_id": "bbbbbbbb-8888-4888-8888-bbbbbbbbbbbb",
+      "boundary_id": "research-01__tooling-01",
+      "region_a": "research-01",
+      "region_b": "tooling-01",
+      "gradient_refs": [
+        "ffffffff-aaaa-4fff-8fff-ffffffffffff"
+      ],
+      "classification": "front_candidate",
+      "method": "gradient_weighted_score_v1",
+      "window_start": "2026-10-04T05:00:00+09:00",
+      "window_end": "2026-10-04T05:05:00+09:00",
+      "weights": {
+        "activity_pressure": 0.7
+      },
+      "score": 0.42
+    }
+  ]
+}
