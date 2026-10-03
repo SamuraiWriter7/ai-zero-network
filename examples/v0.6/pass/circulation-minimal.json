@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.6",
+  "circulation_id": "11111111-1111-4111-8111-111111111111",
+  "window_start": "2026-10-04T06:00:00+09:00",
+  "window_end": "2026-10-04T06:05:00+09:00",
+  "region_refs": [
+    "planner-01",
+    "executor-01",
+    "reviewer-01"
+  ],
+  "cycle_count": 7,
+  "return_count": 11,
+  "observation_state": "complete",
+  "cycle_method": "directed_cycle_count_v1"
+}
