@@ -1,0 +1,15 @@
+{
+  "snapshots": [],
+  "field_deltas": [
+    {
+      "delta_id": "dddddddd-4444-4444-8444-dddddddddddd",
+      "region": "finance-01",
+      "from_snapshot": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "to_snapshot": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "changes": {
+        "trace_count": 10
+      }
+    }
+  ],
+  "region_flows": []
+}
