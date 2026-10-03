@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.5",
+  "gradient_id": "99999999-9999-4999-8999-999999999999",
+  "boundary_id": "finance-01__safety-01",
+  "region_a": "finance-01",
+  "region_b": "safety-01",
+  "metric": "activity_pressure",
+  "value_a": 0.8,
+  "value_b": 0.3,
+  "gradient": 0.5,
+  "method": "estimated_difference",
+  "window_start": "2026-10-04T03:40:00+09:00",
+  "window_end": "2026-10-04T03:45:00+09:00"
+}
