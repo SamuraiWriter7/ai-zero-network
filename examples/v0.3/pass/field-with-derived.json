@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "22222222-2222-4222-8222-222222222222",
+  "region": "research-01",
+  "window_start": "2026-10-03T10:00:00+09:00",
+  "window_end": "2026-10-03T10:10:00+09:00",
+  "observation_state": "complete",
+  "observations": {
+    "trace_count": 120,
+    "receipt_count": 8,
+    "authority_request_count": 14,
+    "authority_grant_count": 6,
+    "authority_deny_count": 8,
+    "active_agent_count": 17
+  },
+  "derived": {
+    "activity_pressure": {
+      "value": 0.72,
+      "method": "trace_rate_normalized_v1"
+    },
+    "effective_pressure": {
+      "value": 0.41,
+      "method": "receipt_rate_normalized_v1"
+    },
+    "authority_friction": {
+      "value": 0.5714,
+      "method": "deny_count/request_count"
+    }
+  }
+}
