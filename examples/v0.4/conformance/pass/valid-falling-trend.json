@@ -1,0 +1,57 @@
+{
+  "snapshots": [
+    {
+      "snapshot_id": "33333333-aaaa-4333-8333-333333333333",
+      "region": "research-01",
+      "window_start": "2026-10-04T01:20:00+09:00",
+      "window_end": "2026-10-04T01:25:00+09:00",
+      "observations": {
+        "trace_count": 180,
+        "receipt_count": 30,
+        "authority_request_count": 20,
+        "authority_grant_count": 14,
+        "authority_deny_count": 6,
+        "active_agent_count": 25
+      }
+    },
+    {
+      "snapshot_id": "44444444-aaaa-4444-8444-444444444444",
+      "region": "research-01",
+      "window_start": "2026-10-04T01:25:00+09:00",
+      "window_end": "2026-10-04T01:30:00+09:00",
+      "observations": {
+        "trace_count": 120,
+        "receipt_count": 12,
+        "authority_request_count": 12,
+        "authority_grant_count": 8,
+        "authority_deny_count": 4,
+        "active_agent_count": 19
+      }
+    }
+  ],
+  "field_deltas": [
+    {
+      "delta_id": "bbbbbbbb-2222-4222-8222-bbbbbbbbbbbb",
+      "region": "research-01",
+      "from_snapshot": "33333333-aaaa-4333-8333-333333333333",
+      "to_snapshot": "44444444-aaaa-4444-8444-444444444444",
+      "changes": {
+        "trace_count": -60,
+        "receipt_count": -18,
+        "authority_request_count": -8,
+        "authority_grant_count": -6,
+        "authority_deny_count": -2,
+        "active_agent_count": -6
+      },
+      "derived": {
+        "activity_pressure": {
+          "from": 0.8,
+          "to": 0.5,
+          "trend": "falling",
+          "method": "direct_compare_v1"
+        }
+      }
+    }
+  ],
+  "region_flows": []
+}
