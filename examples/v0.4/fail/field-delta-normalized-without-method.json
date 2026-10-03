@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.4",
+  "delta_id": "77777777-7777-4777-8777-777777777777",
+  "region": "tooling-01",
+  "from_snapshot": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+  "to_snapshot": "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+  "changes": {
+    "trace_count": 12
+  },
+  "comparison": {
+    "window_compatibility": "normalized",
+    "delta_state": "complete"
+  }
+}
