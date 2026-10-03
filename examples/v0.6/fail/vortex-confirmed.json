@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.6",
+  "candidate_id": "99999999-9999-4999-8999-999999999999",
+  "circulation_refs": [
+    "22222222-2222-4222-8222-222222222222"
+  ],
+  "classification": "vortex_confirmed",
+  "method": "cycle_density_threshold_v1",
+  "window_start": "2026-10-04T07:00:00+09:00",
+  "window_end": "2026-10-04T07:05:00+09:00",
+  "thresholds": {
+    "cycle_density": 0.4
+  }
+}
