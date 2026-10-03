@@ -1,0 +1,34 @@
+{
+  "snapshots": [
+    {
+      "snapshot_id": "33333333-bbbb-4333-8333-333333333333",
+      "region": "finance-01",
+      "window_start": "2026-10-04T03:20:00+09:00",
+      "window_end": "2026-10-04T03:25:00+09:00",
+      "observations": {
+        "trace_count": 100
+      }
+    },
+    {
+      "snapshot_id": "44444444-bbbb-4444-8444-444444444444",
+      "region": "safety-01",
+      "window_start": "2026-10-04T03:25:00+09:00",
+      "window_end": "2026-10-04T03:30:00+09:00",
+      "observations": {
+        "trace_count": 120
+      }
+    }
+  ],
+  "field_deltas": [
+    {
+      "delta_id": "ffffffff-6666-4666-8666-ffffffffffff",
+      "region": "finance-01",
+      "from_snapshot": "33333333-bbbb-4333-8333-333333333333",
+      "to_snapshot": "44444444-bbbb-4444-8444-444444444444",
+      "changes": {
+        "trace_count": 20
+      }
+    }
+  ],
+  "region_flows": []
+}
