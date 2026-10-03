@@ -1,0 +1,26 @@
+{
+  "participants": [
+    {
+      "agent_id": "agent-a"
+    }
+  ],
+  "authorities": [
+    {
+      "authority_id": "77777777-7777-4777-8777-777777777777",
+      "requester_id": "agent-a",
+      "issuer_id": "agent-a",
+      "subject_id": "agent-a",
+      "scope": [
+        "admin:write"
+      ],
+      "decision": "allow",
+      "source_type": "service",
+      "issued_at": "2026-10-03T08:00:00+09:00",
+      "expires_at": null,
+      "revoked_at": null,
+      "delegation_parent": null
+    }
+  ],
+  "actions": [],
+  "receipts": []
+}
