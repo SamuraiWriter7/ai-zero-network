@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.5",
+  "candidate_id": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+  "boundary_id": "finance-01__safety-01",
+  "region_a": "finance-01",
+  "region_b": "safety-01",
+  "gradient_refs": [
+    "11111111-1111-4111-8111-111111111111"
+  ],
+  "classification": "front_confirmed",
+  "method": "single_metric_threshold_v1",
+  "window_start": "2026-10-04T03:50:00+09:00",
+  "window_end": "2026-10-04T03:55:00+09:00",
+  "thresholds": {
+    "activity_pressure": 0.4
+  }
+}
