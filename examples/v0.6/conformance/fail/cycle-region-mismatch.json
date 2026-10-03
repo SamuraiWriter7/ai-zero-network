@@ -1,0 +1,27 @@
+{
+  "circulations": [
+    {
+      "circulation_id": "66666666-aaaa-4666-8666-666666666666",
+      "window_start": "2026-10-04T07:50:00+09:00",
+      "window_end": "2026-10-04T07:55:00+09:00",
+      "region_refs": [
+        "agent-a",
+        "agent-b"
+      ],
+      "cycle_count": 1,
+      "return_count": 1,
+      "cycles": [
+        {
+          "cycle_id": "11111111-bbbb-4111-8111-111111111111",
+          "path": [
+            "agent-a",
+            "agent-c",
+            "agent-a"
+          ],
+          "occurrence_count": 1
+        }
+      ]
+    }
+  ],
+  "vortex_candidates": []
+}
