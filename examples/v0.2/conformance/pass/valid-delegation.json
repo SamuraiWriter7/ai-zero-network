@@ -1,0 +1,71 @@
+{
+  "participants": [
+    {
+      "agent_id": "human-admin-001"
+    },
+    {
+      "agent_id": "agent-coordinator-001"
+    },
+    {
+      "agent_id": "agent-worker-001"
+    }
+  ],
+  "authorities": [
+    {
+      "authority_id": "33333333-3333-4333-8333-333333333333",
+      "requester_id": "agent-coordinator-001",
+      "issuer_id": "human-admin-001",
+      "subject_id": "agent-coordinator-001",
+      "scope": [
+        "read:document",
+        "write:document"
+      ],
+      "decision": "allow",
+      "source_type": "human",
+      "issued_at": "2026-10-03T08:00:00+09:00",
+      "expires_at": "2026-10-03T10:00:00+09:00",
+      "revoked_at": null,
+      "delegation_parent": null
+    },
+    {
+      "authority_id": "44444444-4444-4444-8444-444444444444",
+      "requester_id": "agent-worker-001",
+      "issuer_id": "agent-coordinator-001",
+      "subject_id": "agent-worker-001",
+      "scope": [
+        "read:document",
+        "write:document"
+      ],
+      "decision": "allow",
+      "source_type": "delegated",
+      "issued_at": "2026-10-03T08:10:00+09:00",
+      "expires_at": "2026-10-03T09:30:00+09:00",
+      "revoked_at": null,
+      "delegation_parent": "33333333-3333-4333-8333-333333333333"
+    }
+  ],
+  "actions": [
+    {
+      "action_id": "action-003",
+      "agent_id": "agent-worker-001",
+      "action": "write_external_record",
+      "required_scope": "write:document",
+      "authority_refs": [
+        "44444444-4444-4444-8444-444444444444"
+      ],
+      "status": "success",
+      "timestamp": "2026-10-03T09:00:00+09:00"
+    }
+  ],
+  "receipts": [
+    {
+      "receipt_id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "agent_id": "agent-worker-001",
+      "action_id": "action-003",
+      "authority_refs": [
+        "44444444-4444-4444-8444-444444444444"
+      ],
+      "timestamp": "2026-10-03T09:00:01+09:00"
+    }
+  ]
+}
