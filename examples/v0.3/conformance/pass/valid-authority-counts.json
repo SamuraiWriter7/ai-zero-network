@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "22222222-aaaa-4222-8222-222222222222",
+  "region": "tooling-01",
+  "window_start": "2026-10-03T10:10:00+09:00",
+  "window_end": "2026-10-03T10:15:00+09:00",
+  "observations": {
+    "trace_count": 50,
+    "receipt_count": 9,
+    "authority_request_count": 10,
+    "authority_grant_count": 6,
+    "authority_deny_count": 4,
+    "active_agent_count": 8
+  }
+}
