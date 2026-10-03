@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.4",
+  "delta_id": "22222222-2222-4222-8222-222222222222",
+  "region": "research-01",
+  "from_snapshot": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+  "to_snapshot": "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+  "changes": {
+    "trace_count": -40,
+    "receipt_count": 6,
+    "authority_request_count": 3,
+    "authority_grant_count": 1,
+    "authority_deny_count": 2,
+    "active_agent_count": -4,
+    "resources": {
+      "tokens": -1200,
+      "cost": 0.24,
+      "compute_units": -3.5
+    }
+  },
+  "derived": {
+    "activity_pressure": {
+      "from": 0.72,
+      "to": 0.51,
+      "trend": "falling",
+      "method": "compare_normalized_activity_pressure_v1"
+    },
+    "effective_pressure": {
+      "from": 0.31,
+      "to": 0.44,
+      "trend": "rising",
+      "method": "compare_normalized_effective_pressure_v1"
+    }
+  },
+  "comparison": {
+    "window_compatibility": "equal_duration",
+    "delta_state": "complete"
+  }
+}
