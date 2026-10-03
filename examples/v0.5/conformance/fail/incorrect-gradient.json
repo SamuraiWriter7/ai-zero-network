@@ -1,0 +1,19 @@
+{
+  "gradients": [
+    {
+      "schema_version": "0.5",
+      "gradient_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "boundary_id": "finance-01__safety-01",
+      "region_a": "finance-01",
+      "region_b": "safety-01",
+      "metric": "activity_pressure",
+      "value_a": 0.8,
+      "value_b": 0.3,
+      "gradient": 0.2,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T04:10:00+09:00",
+      "window_end": "2026-10-04T04:15:00+09:00"
+    }
+  ],
+  "front_candidates": []
+}
