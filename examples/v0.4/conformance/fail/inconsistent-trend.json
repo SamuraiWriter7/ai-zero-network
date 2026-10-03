@@ -1,0 +1,23 @@
+{
+  "snapshots": [],
+  "field_deltas": [
+    {
+      "delta_id": "bbbbbbbb-8888-4888-8888-bbbbbbbbbbbb",
+      "region": "research-01",
+      "from_snapshot": "11111111-cccc-4111-8111-111111111111",
+      "to_snapshot": "22222222-cccc-4222-8222-222222222222",
+      "changes": {
+        "trace_count": 20
+      },
+      "derived": {
+        "activity_pressure": {
+          "from": 0.4,
+          "to": 0.8,
+          "trend": "falling",
+          "method": "direct_compare_v1"
+        }
+      }
+    }
+  ],
+  "region_flows": []
+}
