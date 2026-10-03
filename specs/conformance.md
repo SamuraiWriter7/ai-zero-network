@@ -1,926 +1,1906 @@
-# AI Zero Network v0.1 Conformance
+# AI Zero Network Conformance Index
 
 **Status:** Draft  
-**Version:** v0.1  
-**Scope:** Semantic conformance rules for AI Zero Network v0.1
+**Scope:** AI Zero Network v0.1–v0.6  
+**Purpose:** Common index for structural and semantic conformance requirements  
+**Repository:** `ai-zero-network`
 
 ---
 
-## 1. Purpose
+# 1. Purpose
 
-This document defines semantic conformance requirements for AI Zero Network v0.1.
+This document provides a unified conformance index for AI Zero Network v0.1 through v0.6.
 
-The JSON Schemas validate whether individual Trace and Receipt documents are structurally valid.
+It does not replace the normative version specifications.
 
-This document defines whether multiple records, authority decisions, and external actions form a valid Zero Network lifecycle.
-
-The distinction is:
+Instead, it provides a common map across:
 
 ```text
-JSON Schema Validation
-=
-Is this individual document structurally valid?
-
-Conformance Validation
-=
-Did the system behave according to Zero Network rules?
+Specification
+↓
+JSON Schema
+↓
+Schema Examples
+↓
+Schema Validator
+↓
+Semantic Conformance Fixtures
+↓
+Conformance Validator
+↓
+GitHub Actions
 ```
 
-A document MAY be schema-valid while the overall system behavior is non-conforming.
+The current conformance scope covers the:
+
+> **AI Zero Network Observation & Structural Meteorology Core v0.1–v0.6**
 
 ---
 
-## 2. Conformance Model
+# 2. Core Conformance Principle
 
-AI Zero Network v0.1 uses the following minimum lifecycle:
+AI Zero Network separates structural validity from semantic validity.
 
 ```text
-Participant
-    ↓
-Trace
-    ↓
-Action Request
-    ↓
-Authority Validation
-    ↓
- ┌──┴───┐
-DENY   ALLOW
- │       │
-Trace    ↓
-      External Action
-          ↓
-       Receipt
+Schema Validity
+≠
+Semantic Conformance
 ```
 
-The core rule is:
+JSON Schema answers:
 
-> **External effect MUST be preceded by valid authority and followed by a Receipt.**
+> Is this object structurally well-formed?
+
+Conformance validation answers:
+
+> Are the relationships represented by this object structurally and semantically consistent?
+
+Both layers are required.
 
 ---
 
-## 3. Conformance Levels
+# 3. Conformance Is Not Trust
 
-v0.1 defines two levels of validation.
+Passing AI Zero Network conformance does not prove that a system is:
 
-### Level 1 — Schema Conformance
+- safe,
+- benevolent,
+- accurate,
+- secure,
+- reliable,
+- legally compliant,
+- or trustworthy.
 
-Validates individual JSON documents against:
+Therefore:
+
+> **Conformance ≠ Trust**
+
+Instead:
+
+> **Conformance = Minimum structural accountability**
+
+A conformant implementation provides enough structure for important claims to be checked and reconstructed.
+
+---
+
+# 4. Conformance Layers
+
+AI Zero Network currently uses four practical validation layers.
+
+## Layer 1 — JSON Syntax
+
+The artifact must be valid JSON.
+
+---
+
+## Layer 2 — JSON Schema
+
+Checks structural properties such as:
+
+```text
+required fields
+types
+formats
+UUIDs
+date-time values
+enums
+minimum values
+allowed properties
+```
+
+---
+
+## Layer 3 — Semantic Conformance
+
+Checks relationships that JSON Schema alone cannot reliably enforce.
+
+Examples:
+
+```text
+authority existed before action
+
+delta matches source snapshots
+
+gradient matches source values
+
+cycle returns to origin
+
+candidate references real evidence
+```
+
+---
+
+## Layer 4 — CI Enforcement
+
+GitHub Actions runs validators so conformance regressions fail automatically.
+
+---
+
+# 5. Version Conformance Map
+
+| Version | Conformance Domain | Main Semantic Question |
+|---|---|---|
+| v0.1 | Existence / Trace / Receipt | Did observable action leave structurally valid evidence? |
+| v0.2 | Authority Provenance | Did authority exist, remain valid, and stay within its source? |
+| v0.3 | Field Observation | Is the field measurement internally consistent? |
+| v0.4 | Field Dynamics | Does reported change and flow match observable source state? |
+| v0.5 | Boundary / Front Candidate | Is boundary evidence reconstructable and candidate classification supported? |
+| v0.6 | Circulation / Vortex Candidate | Is circulation reconstructable and vortex classification supported by evidence? |
+
+---
+
+# 6. v0.1 — Existence Conformance
+
+v0.1 establishes minimum structural accountability for actors, traces, authority-sensitive actions, and receipts.
+
+Primary schemas:
 
 ```text
 schemas/trace-v0.1.schema.json
 schemas/receipt-v0.1.schema.json
 ```
 
-Level 1 checks syntax and document structure.
+Schema validator:
 
-Examples:
+```text
+scripts/validate.py
+```
 
-- required fields,
-- UUID format,
-- timestamps,
-- allowed event types,
-- hash format,
-- risk score range,
-- non-empty authority scopes.
+Semantic validator:
 
----
+```text
+scripts/validate_conformance.py
+```
 
-### Level 2 — Lifecycle Conformance
+Conformance fixtures:
 
-Validates relationships between:
-
-- participants,
-- Trace records,
-- authority decisions,
-- external actions,
-- and Receipts.
-
-Level 2 determines whether system behavior respects Zero Network invariants.
+```text
+examples/v0.1/conformance/pass/
+examples/v0.1/conformance/fail/
+```
 
 ---
 
-# 4. Core Conformance Rules
+# 7. v0.1 Conformance Rules
 
 ## ZN-CONF-001 — Known Participant
 
-Every Trace and Receipt MUST reference a participant known to the Zero Network.
-
-The participant identifier MUST NOT silently refer to multiple distinct actors.
-
-Example:
-
-```text
-agent_id = agent-finance-001
-```
-
-MUST resolve consistently to the same logical participant within the applicable identity domain.
-
-### PASS
-
-```text
-registered participant:
-agent-finance-001
-
-Trace:
-agent-finance-001
-
-Receipt:
-agent-finance-001
-```
-
-### FAIL
-
-```text
-Receipt:
-agent-unknown-999
-
-No corresponding registered participant exists.
-```
+Every referenced actor MUST be a known participant in the evaluated fixture or system context.
 
 ---
 
 ## ZN-CONF-002 — Receipt References Existing Trace
 
-Every Receipt MUST reference an existing Trace through `trace_id`.
-
-### PASS
-
-```text
-Trace:
-trace_id = T-001
-
-Receipt:
-trace_id = T-001
-```
-
-### FAIL
-
-```text
-Receipt:
-trace_id = T-999
-
-No Trace T-999 exists.
-```
-
-A Receipt without a corresponding Trace cannot be considered valid Zero Network history.
+A Receipt MUST reference an existing Trace.
 
 ---
 
 ## ZN-CONF-003 — Actor Consistency
 
-The `agent_id` in a Receipt MUST match the actor associated with the Trace referenced by that Receipt unless an explicitly defined delegation mechanism exists.
-
-Delegation is outside the scope of v0.1.
-
-Therefore, in v0.1:
-
-```text
-Trace.agent_id
-MUST equal
-Receipt.agent_id
-```
-
-### PASS
-
-```text
-Trace.agent_id   = agent-a
-Receipt.agent_id = agent-a
-```
-
-### FAIL
-
-```text
-Trace.agent_id   = agent-a
-Receipt.agent_id = agent-b
-```
+The actor identified by a Receipt MUST be consistent with the actor associated with the referenced action or Trace.
 
 ---
 
 ## ZN-CONF-004 — Authority Before Action
 
-Every externally effective action MUST be preceded by successful authority validation.
-
-The authority decision MUST occur before the external action.
+An externally effective action requiring authority MUST NOT precede its valid authority decision.
 
 Conceptually:
 
 ```text
-authority_granted.timestamp
-<
-external_action.timestamp
+Authority
+↓
+Action
 ```
 
-An implementation MAY represent authority validation using:
-
-- a dedicated authority record,
-- an authorization token,
-- a signed capability,
-- a policy engine decision,
-- or another verifiable mechanism.
-
-The mechanism is implementation-defined.
-
-The ordering requirement is not.
-
-### PASS
+not:
 
 ```text
-10:00:00 authority granted
-10:00:02 external action
-10:00:03 Receipt emitted
+Action
+↓
+Authority
 ```
-
-### FAIL
-
-```text
-10:00:00 external action
-10:00:02 authority granted
-```
-
-Later authorization MUST NOT retroactively legitimize an earlier unauthorized action.
 
 ---
 
 ## ZN-CONF-005 — Authority Scope Covers Action
 
-The authority used for an action MUST permit that action.
-
-Example:
-
-```text
-action:
-write_external_record
-
-required scope:
-write:document
-```
-
-The following is conforming:
-
-```text
-authority_used:
-- write:document
-```
-
-The following is not:
-
-```text
-authority_used:
-- read:document
-```
-
-Authority validation MUST consider the actual effective action, not merely whether the participant possessed some unrelated permission.
+The granted scope MUST cover the action being performed.
 
 ---
 
 ## ZN-CONF-006 — No Self-Escalation
 
-A participant MUST NOT create or expand its own authority and treat that authority as valid without an external authorization source.
+An actor MUST NOT silently create additional privilege for itself.
 
-### FAIL
-
-```text
-Agent has:
-read:market
-
-Agent modifies local state to:
-read:market
-write:order
-
-Agent executes write:order
-```
-
-This violates Zero Network conformance even if the resulting Receipt is structurally valid.
-
-Authority changes MUST originate from an authority source outside the requesting participant's unilateral control.
+Full provenance enforcement is strengthened in v0.2.
 
 ---
 
 ## ZN-CONF-007 — Denied Action Produces No Execution Receipt
 
-If an action request is denied, the denied attempt MAY produce one or more Trace records.
-
-It MUST NOT produce a Receipt claiming successful external execution.
-
-### PASS
-
-```text
-Trace:
-authority_request
-
-Trace:
-authority_denied
-
-No execution Receipt
-```
-
-### FAIL
-
-```text
-Trace:
-authority_denied
-
-Receipt:
-action = submit_external_order
-```
-
-A denial is observable history.
-
-It is not an executed external effect.
+A denied action MUST NOT produce a Receipt claiming successful external effect.
 
 ---
 
 ## ZN-CONF-008 — Failed Action Produces No Success Receipt
 
-If an authorized external action fails before producing its intended external effect, it MUST NOT produce a Receipt claiming successful completion.
-
-The failure SHOULD produce a Trace.
-
-### PASS
-
-```text
-authority granted
-↓
-external action attempted
-↓
-execution failed
-↓
-error Trace
-```
-
-### FAIL
-
-```text
-execution failed
-↓
-Receipt claims action completed
-```
-
-Receipt semantics in v0.1 are intentionally strict:
-
-> **Receipt means effective action occurred.**
+A failed action MUST NOT be represented as a successful externally effective action.
 
 ---
 
 ## ZN-CONF-009 — Successful External Action Requires Receipt
 
-Every successfully completed externally effective action MUST produce exactly one authoritative execution Receipt for that action instance.
-
-An implementation MAY create supplementary records, but MUST NOT omit the authoritative Receipt.
-
-### FAIL
-
-```text
-authority granted
-↓
-external state changed
-↓
-no Receipt
-```
-
-This is a receiptless effect and violates the Zero Network model.
+A successful externally effective action MUST have a corresponding Receipt.
 
 ---
 
 ## ZN-CONF-010 — No Duplicate Authoritative Receipt
 
-One external action instance MUST NOT produce multiple independent authoritative Receipts that represent the same execution as separate events.
-
-This prevents duplicated history and future double-counting of:
-
-- resource usage,
-- contribution,
-- attribution,
-- payment,
-- or value distribution.
-
-Duplicate transport or replicated storage copies are allowed if they retain the same `receipt_id`.
-
-### PASS
-
-```text
-receipt_id = R-001
-replicated across three storage nodes
-```
-
-### FAIL
-
-```text
-Same action instance
-
-receipt_id = R-001
-receipt_id = R-002
-
-Both independently claim to be the authoritative execution Receipt.
-```
+The same successful action MUST NOT be represented by multiple conflicting authoritative Receipts.
 
 ---
 
 ## ZN-CONF-011 — Trace Causality Must Not Self-Reference
 
-A Trace MUST NOT reference itself as its own `parent_trace_id`.
+A Trace MUST NOT declare itself as its own causal parent.
 
-### FAIL
-
-```text
-trace_id        = T-001
-parent_trace_id = T-001
-```
-
-An implementation SHOULD also detect causal loops when practical.
-
-Example:
-
-```text
-T-001 → T-002 → T-003 → T-001
-```
-
-Full cycle detection is RECOMMENDED but not required for minimal v0.1 conformance.
+Implementations SHOULD reject obvious causal cycles where appropriate.
 
 ---
 
-## ZN-CONF-012 — Receipt Time Must Not Precede Its Effective Action
+## ZN-CONF-012 — Receipt Time Must Not Precede Action
 
-A Receipt timestamp MUST represent the completion of, or a time after, the externally effective action it proves.
+A Receipt timestamp MUST NOT precede the action it proves.
 
-A Receipt MUST NOT predate the action.
+---
+
+# 8. v0.1 Compact Law
+
+```text
+No invisible actor.
+No invisible action.
+No authorityless action.
+No receiptless effect.
+```
+
+---
+
+# 9. v0.2 — Authority Provenance Conformance
+
+v0.2 makes authority origin, validity, and delegation reconstructable.
+
+Primary schema:
+
+```text
+schemas/authority-v0.2.schema.json
+```
+
+Schema validator:
+
+```text
+scripts/validate_v0_2.py
+```
+
+Semantic validator:
+
+```text
+scripts/validate_conformance_v0_2.py
+```
+
+Fixtures:
+
+```text
+examples/v0.2/conformance/pass/
+examples/v0.2/conformance/fail/
+```
+
+---
+
+# 10. v0.2 Authority Rules
+
+## ZN-AUTH-001 — Authority Requires Provenance
+
+An Authority Record MUST identify a source and issuer.
+
+Authority MUST NOT appear without provenance.
+
+---
+
+## ZN-AUTH-002 — No Unilateral Self-Escalation
+
+An actor MUST NOT unilaterally become the issuer of new privilege for itself.
+
+Policy-based authority MAY be handled separately when explicitly governed.
+
+---
+
+## ZN-AUTH-003 — Authority Must Be Valid at Action Time
+
+An action MUST occur after authority issuance and before expiration, if an expiration exists.
+
+---
+
+## ZN-AUTH-004 — Revoked Authority Cannot Be Used
+
+An action MUST NOT rely on authority after its revocation time.
+
+---
+
+## ZN-AUTH-005 — Denied Authority Cannot Authorize
+
+A denied Authority Record MUST NOT authorize an action.
+
+---
+
+## ZN-AUTH-006 — Scope Must Cover Action
+
+The action MUST fall within the authority scope.
+
+---
+
+## ZN-AUTH-007 — Authority Must Belong to Subject
+
+The actor performing the action MUST match the authorized subject.
+
+---
+
+# 11. v0.2 Delegation Rules
+
+## ZN-DELEG-001 — Parent Authority Must Exist
+
+A delegated authority MUST reference an existing parent authority.
+
+---
+
+## ZN-DELEG-002 — Parent Authority Must Be Valid
+
+The parent authority MUST be valid when delegation occurs.
+
+---
+
+## ZN-DELEG-003 — Child Scope Must Not Exceed Parent
 
 Conceptually:
 
 ```text
-authority validation
-    ≤
-action execution
-    ≤
-Receipt timestamp
+child_scope
+⊆
+parent_scope
 ```
 
 ---
 
-# 5. Recommended Temporal Ordering
+## ZN-DELEG-004 — Child Lifetime Must Not Exceed Parent
 
-A conforming successful lifecycle SHOULD follow:
+A child authority MUST NOT remain valid beyond its parent authority.
+
+---
+
+## ZN-DELEG-005 — Revocation Propagates Downward
+
+Revocation of a parent authority invalidates dependent delegated authority according to the defined chain.
+
+---
+
+# 12. Effective Delegated Scope
+
+For a delegation chain:
 
 ```text
-T0  identity available
-T1  action request Trace
-T2  authority validation
-T3  external action begins
-T4  external effect confirmed
-T5  action completion Trace
-T6  Receipt emitted
+A0
+↓
+A1
+↓
+A2
 ```
 
-Not every implementation must expose all six events.
+effective authority is bounded by the intersection of valid scopes.
 
-However, the following relationship MUST hold:
+Conceptually:
 
 ```text
-Authority
-    before
-External Effect
-    before or at
-Receipt
+effective_scope
+=
+scope(A0)
+∩
+scope(A1)
+∩
+scope(A2)
 ```
 
 ---
 
-# 6. Minimal Successful Conformance Case
+# 13. v0.2 Compact Law
+
+```text
+No authority without an issuer.
+No self-created privilege escalation.
+No action under expired or revoked authority.
+No delegation beyond the parent authority.
+No effective action without reconstructable authority provenance.
+```
+
+---
+
+# 14. v0.3 — Field Observation Conformance
+
+v0.3 validates aggregate network-state measurement.
+
+Primary schema:
+
+```text
+schemas/field-snapshot-v0.3.schema.json
+```
+
+Schema validator:
+
+```text
+scripts/validate_v0_3.py
+```
+
+Semantic validator:
+
+```text
+scripts/validate_conformance_v0_3.py
+```
+
+Fixtures:
+
+```text
+examples/v0.3/conformance/pass/
+examples/v0.3/conformance/fail/
+```
+
+---
+
+# 15. v0.3 Field Rules
+
+## ZN-FIELD-001 — Valid Observation Window
+
+A Field Snapshot MUST represent a bounded forward window.
+
+```text
+window_start
+<
+window_end
+```
+
+---
+
+## ZN-FIELD-002 — Observable Evidence
+
+Field observations MUST derive from observable records.
+
+Private hidden reasoning MUST NOT be required.
+
+---
+
+## ZN-FIELD-003 — Derived Metrics Must Be Explicit
+
+Derived values MUST remain separate from raw observations and identify their method.
+
+---
+
+## ZN-FIELD-004 — Counts Must Be Non-Negative
+
+Observed counts MUST NOT be negative.
+
+This is primarily enforced at Schema level.
+
+---
+
+## ZN-FIELD-005 — Authority Counts Must Be Consistent
+
+At minimum:
+
+```text
+authority_grant_count
++
+authority_deny_count
+<=
+authority_request_count
+```
+
+---
+
+# 16. v0.3 Derived Metric Rules
+
+For:
+
+```text
+authority_friction
+```
+
+when method is:
+
+```text
+deny_count/request_count
+```
+
+the reported value MUST match:
+
+```text
+authority_deny_count
+/
+authority_request_count
+```
+
+when request count is greater than zero.
+
+If:
+
+```text
+authority_request_count = 0
+```
+
+the metric SHOULD be absent rather than represented as a normal zero ratio.
+
+This preserves:
+
+```text
+no requests
+≠
+0% denial
+```
+
+---
+
+# 17. v0.3 Provenance Rules
+
+If `generated_at` exists:
+
+```text
+generated_at
+>=
+window_end
+```
+
+A Field Snapshot MUST NOT claim to have been generated from a completed window before that window ended.
+
+`source_record_count` SHOULD remain consistent with the observable record volume without assuming double-counting semantics that have not been standardized.
+
+---
+
+# 18. v0.3 Compact Law
+
+```text
+No field value without a Region.
+No snapshot without a time window.
+No observation without observable evidence.
+No interpretation disguised as observation.
+```
+
+---
+
+# 19. v0.4 — Field Dynamics Conformance
+
+v0.4 validates temporal change and directional Region Flow.
+
+Primary schemas:
+
+```text
+schemas/field-delta-v0.4.schema.json
+schemas/region-flow-v0.4.schema.json
+```
+
+Schema validator:
+
+```text
+scripts/validate_v0_4.py
+```
+
+Semantic validator:
+
+```text
+scripts/validate_conformance_v0_4.py
+```
+
+Fixtures:
+
+```text
+examples/v0.4/conformance/pass/
+examples/v0.4/conformance/fail/
+```
+
+---
+
+# 20. v0.4 Field Delta Rules
+
+## ZN-DYN-001 — Two Existing Source Snapshots
+
+Every Field Delta MUST reference:
+
+```text
+from_snapshot
+to_snapshot
+```
+
+Both MUST exist.
+
+---
+
+## ZN-DYN-002 — Forward Temporal Order
+
+The `to_snapshot` MUST represent a later state than `from_snapshot`.
+
+---
+
+## ZN-DYN-003 — Region Compatibility
+
+An ordinary Field Delta MUST compare the same Region.
+
+Cross-region differences belong to Boundary Gradient analysis.
+
+---
+
+## ZN-DYN-004 — Delta Must Be Reconstructable
+
+For each compatible metric:
+
+```text
+delta
+=
+to_value
+-
+from_value
+```
+
+The reported Delta MUST match that calculation.
+
+---
+
+# 21. v0.4 Normalization Rules
+
+If compared snapshot windows have unequal duration, direct raw-count interpretation may be misleading.
+
+Therefore unequal time windows SHOULD require:
+
+```text
+window_compatibility = normalized
+```
+
+with an explicit:
+
+```text
+normalization_method
+```
+
+---
+
+# 22. v0.4 Trend Rules
+
+For directly compared derived values:
+
+```text
+to > from
+→ rising
+
+to < from
+→ falling
+
+to ≈ from
+→ stable
+```
+
+If tolerance is used for `stable`, it SHOULD be documented.
+
+Trend is interpretation.
+
+Delta is measurement.
+
+They MUST remain distinguishable.
+
+---
+
+# 23. v0.4 Region Flow Rules
+
+## ZN-FLOW-001 — Source and Target Required
+
+Every Region Flow MUST identify:
+
+```text
+source_region
+target_region
+```
+
+---
+
+## ZN-FLOW-002 — Direction Must Be Preserved
+
+```text
+A → B
+```
+
+and:
+
+```text
+B → A
+```
+
+are separate flows.
+
+Ordinary cross-region flow MUST NOT use identical source and target Regions.
+
+---
+
+## ZN-FLOW-003 — Valid Observation Window
+
+```text
+window_start
+<
+window_end
+```
+
+---
+
+# 24. v0.4 Flow Rate Rules
+
+When method is:
+
+```text
+trace_count/per_minute
+```
+
+then:
+
+```text
+flow_rate
+=
+trace_count / duration_minutes
+```
+
+When method is:
+
+```text
+receipt_count/per_minute
+```
+
+then:
+
+```text
+effective_flow
+=
+receipt_count / duration_minutes
+```
+
+---
+
+# 25. v0.4 Compact Law
+
+```text
+No Delta without two observations.
+No trend without measurable change.
+No flow without direction.
+```
+
+---
+
+# 26. v0.5 — Boundary Gradient Conformance
+
+v0.5 validates differences between Regions and evidence-backed Front Candidates.
+
+Primary schemas:
+
+```text
+schemas/boundary-gradient-v0.5.schema.json
+schemas/front-candidate-v0.5.schema.json
+```
+
+Schema validator:
+
+```text
+scripts/validate_v0_5.py
+```
+
+Semantic validator:
+
+```text
+scripts/validate_conformance_v0_5.py
+```
+
+Fixtures:
+
+```text
+examples/v0.5/conformance/pass/
+examples/v0.5/conformance/fail/
+```
+
+---
+
+# 27. v0.5 Gradient Rules
+
+## ZN-GRAD-001 — Two Distinct Regions
+
+```text
+region_a
+!=
+region_b
+```
+
+---
+
+## ZN-GRAD-002 — Metric Compatibility
+
+Compared values MUST represent the same compatible metric semantics.
+
+---
+
+## ZN-GRAD-003 — Compatible Time Scope
+
+Boundary comparisons MUST use compatible windows or explicitly declared temporal alignment or normalization.
+
+---
+
+## ZN-GRAD-004 — Gradient Must Be Reconstructable
+
+For:
+
+```text
+method = absolute_difference
+```
+
+the required calculation is:
+
+```text
+gradient
+=
+abs(value_a - value_b)
+```
+
+For:
+
+```text
+method = directional_difference
+```
+
+the required calculation is:
+
+```text
+gradient
+=
+value_a - value_b
+```
+
+---
+
+# 28. v0.5 Front Candidate Rules
+
+## ZN-FRONT-001 — Gradient Evidence Required
+
+Every Front Candidate MUST reference existing gradient evidence.
+
+---
+
+## ZN-FRONT-002 — Candidate Only
+
+v0.5 permits:
+
+```text
+front_candidate
+```
+
+It does not permit:
+
+```text
+front_confirmed
+```
+
+as a normative classification.
+
+---
+
+## ZN-FRONT-003 — Classification Method Required
+
+Every Front Candidate MUST expose its classifier method.
+
+---
+
+## ZN-FRONT-004 — Thresholds Must Be Explicit
+
+Threshold-based methods MUST expose their threshold configuration.
+
+---
+
+# 29. v0.5 Boundary Consistency
+
+Each referenced gradient SHOULD match the candidate's:
+
+```text
+boundary_id
+region_a
+region_b
+window_start
+window_end
+```
+
+unless the method explicitly defines an aggregation across windows.
+
+The current v0.5 validator expects matching analysis windows for the conformance fixtures.
+
+---
+
+# 30. v0.5 Threshold Conformance
+
+For:
+
+```text
+single_metric_threshold_v1
+```
+
+the referenced metric gradient MUST meet or exceed its declared threshold.
+
+For:
+
+```text
+multi_metric_threshold_v1
+```
+
+each declared threshold MUST have corresponding referenced gradient evidence and satisfy the configured threshold.
+
+For boundary-strength classification, conformance evaluates the magnitude of directional gradients where appropriate.
+
+---
+
+# 31. v0.5 Weighted Score Conformance
+
+For:
+
+```text
+gradient_weighted_score_v1
+```
+
+weights MUST sum to:
+
+```text
+1.0
+```
+
+The score is reconstructed as:
+
+```text
+score
+=
+Σ(
+  abs(metric_gradient)
+  ×
+  metric_weight
+)
+```
+
+Every weighted metric MUST have referenced gradient evidence.
+
+---
+
+# 32. v0.5 Provenance
+
+If present:
+
+```text
+source_gradient_refs
+```
+
+MUST correspond to the evidence referenced by the candidate.
+
+And:
+
+```text
+generated_at
+>=
+window_end
+```
+
+---
+
+# 33. v0.5 Compact Law
+
+```text
+No Gradient without two Regions.
+No comparison without compatible metrics.
+No Gradient without reconstructable evidence.
+No Front Candidate without Gradient evidence.
+No Candidate presented as certainty.
+```
+
+---
+
+# 34. v0.6 — Circulation Conformance
+
+v0.6 validates cyclic directional flow and evidence-backed Vortex Candidates.
+
+Primary schemas:
+
+```text
+schemas/circulation-observation-v0.6.schema.json
+schemas/vortex-candidate-v0.6.schema.json
+```
+
+Schema validator:
+
+```text
+scripts/validate_v0_6.py
+```
+
+Semantic validator:
+
+```text
+scripts/validate_conformance_v0_6.py
+```
+
+Fixtures:
+
+```text
+examples/v0.6/conformance/pass/
+examples/v0.6/conformance/fail/
+```
+
+---
+
+# 35. v0.6 Circulation Rules
+
+## ZN-CIRC-001 — Bounded Observation Window
+
+```text
+window_start
+<
+window_end
+```
+
+---
+
+## ZN-CIRC-002 — Multiple Distinct Regions
+
+A qualifying circulation MUST involve at least two distinct Regions or nodes.
+
+---
+
+## ZN-CIRC-003 — Cycle Must Return to Origin
+
+A cycle path MUST return to its starting point.
 
 Example:
 
 ```text
-Participant:
-agent-finance-001
-
-Trace T1:
-type = authority_request
-action = submit_external_order
-
-Authority:
-write:order = ALLOW
-
-External Action:
-submit_external_order succeeds
-
-Trace T2:
-type = action_completed
-parent = T1
-
-Receipt R1:
-trace_id = T2
-agent_id = agent-finance-001
-authority_used = write:order
+A → B → C → A
 ```
 
-Result:
+Valid.
+
+Example:
 
 ```text
-CONFORMING
+A → B → C
+```
+
+Not a complete cycle.
+
+---
+
+## ZN-CIRC-004 — Direction Must Be Preserved
+
+Ordered cycle paths are directional.
+
+```text
+A → B → C → A
+```
+
+and:
+
+```text
+A → C → B → A
+```
+
+are structurally different.
+
+---
+
+# 36. v0.6 Region Membership
+
+Every node appearing in supplied cycle evidence MUST belong to the declared:
+
+```text
+region_refs
+```
+
+for that Circulation Observation.
+
+---
+
+# 37. v0.6 Cycle Count Reconstruction
+
+When explicit `cycles[]` evidence is provided:
+
+```text
+cycle_count
+=
+Σ occurrence_count
+```
+
+for the normalized cycle records supplied in the fixture.
+
+If no explicit cycle records are provided, the count MAY originate from the declared detection method.
+
+---
+
+# 38. v0.6 Return Rate
+
+When:
+
+```text
+method = return_count/per_minute
+```
+
+then:
+
+```text
+return_rate
+=
+return_count / duration_minutes
 ```
 
 ---
 
-# 7. Minimal Denied Conformance Case
+# 39. v0.6 Vortex Candidate Rules
 
-```text
-Participant:
-agent-finance-001
+## ZN-VORTEX-001 — Circulation Evidence Required
 
-Trace T1:
-type = authority_request
-
-Authority:
-write:order = DENY
-
-Trace T2:
-type = authority_denied
-parent = T1
-
-No external action
-No execution Receipt
-```
-
-Result:
-
-```text
-CONFORMING
-```
-
-A denied action is not a failure of Zero Network.
-
-It is a valid observable outcome.
+Every Vortex Candidate MUST reference existing circulation evidence.
 
 ---
 
-# 8. Minimal Failed Execution Case
+## ZN-VORTEX-002 — Candidate Only
+
+v0.6 permits:
 
 ```text
-Trace T1:
-action_requested
-
-Authority:
-ALLOW
-
-External action attempted
-
-Execution:
-FAILED
-
-Trace T2:
-error
-
-No execution Receipt
+vortex_candidate
 ```
 
-Result:
+It does NOT permit:
 
 ```text
-CONFORMING
+vortex_confirmed
 ```
 
-The system remains conforming because it did not falsely convert an unsuccessful attempt into authoritative history.
+or:
+
+```text
+storm
+```
+
+as normative classifications.
 
 ---
 
-# 9. Non-Conforming Lifecycle Examples
+## ZN-VORTEX-003 — Classification Method Required
 
-## FAIL-CONF-001 — Unknown Actor
+Every Vortex Candidate MUST expose the classifier method.
+
+---
+
+## ZN-VORTEX-004 — Threshold Configuration Must Be Explicit
+
+Threshold-based classification MUST expose its thresholds.
+
+---
+
+# 40. v0.6 Candidate Time Consistency
+
+The candidate analysis interval MUST be compatible with referenced circulation evidence.
+
+The current v0.6 conformance fixtures require matching windows.
+
+---
+
+# 41. v0.6 Core Region Consistency
+
+If a candidate declares:
 
 ```text
-Receipt references an unregistered agent_id.
+core_regions
 ```
 
-Violates:
-
-`ZN-CONF-001`
-
----
-
-## FAIL-CONF-002 — Missing Referenced Trace
+then:
 
 ```text
-Receipt.trace_id does not resolve to an existing Trace.
+core_regions
+⊆
+union(referenced circulation.region_refs)
 ```
-
-Violates:
-
-`ZN-CONF-002`
 
 ---
 
-## FAIL-CONF-003 — Actor Mismatch
+# 42. v0.6 Cycle Density Threshold
+
+For:
 
 ```text
-Trace.agent_id != Receipt.agent_id
+cycle_density_threshold_v1
 ```
 
-Violates:
+the referenced circulation evidence MUST expose `cycle_density`.
 
-`ZN-CONF-003`
+The observed value MUST meet the configured threshold.
 
 ---
 
-## FAIL-CONF-004 — Action Before Authorization
+# 43. v0.6 Persistent Circulation Score
+
+For:
 
 ```text
-External action occurred before authority validation.
+persistent_circulation_score_v1
 ```
 
-Violates:
+v0.6 does not yet define one canonical score formula.
 
-`ZN-CONF-004`
-
----
-
-## FAIL-CONF-005 — Wrong Authority Scope
+Therefore current conformance requires:
 
 ```text
-Agent performs write action using read-only authority.
+score exists
+score >= 0
 ```
 
-Violates:
+but does not reconstruct a formula that the normative specification has not defined.
 
-`ZN-CONF-005`
+This prevents the validator from becoming more normative than the specification.
 
 ---
 
-## FAIL-CONF-006 — Self-Escalated Permission
+# 44. v0.6 Multi-Signal Score
+
+For:
 
 ```text
-Agent grants itself a new permission and uses it.
+multi_signal_vortex_candidate_v1
 ```
 
-Violates:
-
-`ZN-CONF-006`
-
----
-
-## FAIL-CONF-007 — Receipt After Denial
+weights MUST sum to:
 
 ```text
-Authority = DENY
-but successful execution Receipt exists.
+1.0
 ```
 
-Violates:
+Each weighted signal MUST exist.
 
-`ZN-CONF-007`
-
----
-
-## FAIL-CONF-008 — False Success Receipt
+The score is reconstructed as:
 
 ```text
-Execution failed
-but Receipt claims successful effect.
+score
+=
+Σ(
+  signal_value
+  ×
+  signal_weight
+)
 ```
 
-Violates:
-
-`ZN-CONF-008`
+Signals not used by the declared weight map MAY remain as supporting metadata.
 
 ---
 
-## FAIL-CONF-009 — Receiptless Effect
+# 45. v0.6 Provenance
+
+If present:
 
 ```text
-External state changed successfully
-but no Receipt exists.
+source_circulation_refs
 ```
 
-Violates:
+MUST correspond to candidate evidence.
 
-`ZN-CONF-009`
-
----
-
-## FAIL-CONF-010 — Duplicate Receipt
+And:
 
 ```text
-One action instance generates multiple authoritative receipt_ids.
+generated_at
+>=
+window_end
 ```
-
-Violates:
-
-`ZN-CONF-010`
 
 ---
 
-## FAIL-CONF-011 — Self-Referencing Trace
+# 46. v0.6 Compact Law
 
 ```text
-trace_id == parent_trace_id
+No circulation without directed return flow.
+No candidate without cycle evidence.
+No Vortex Candidate without circulation evidence.
+No candidate presented as certainty.
+No Vortex silently promoted to Storm.
 ```
-
-Violates:
-
-`ZN-CONF-011`
 
 ---
 
-## FAIL-CONF-012 — Receipt Predates Action
+# 47. Cross-Version Evidence Chain
+
+AI Zero Network conformance is cumulative in structure.
+
+One possible evidence chain is:
 
 ```text
-Receipt timestamp occurs before the action it claims to prove.
+Trace
+↓
+Authority
+↓
+Receipt
+↓
+Field Snapshot
+↓
+Field Delta
+↓
+Boundary Gradient
+↓
+Front Candidate
 ```
 
-Violates:
-
-`ZN-CONF-012`
-
----
-
-# 10. Schema Validation vs Semantic Validation
-
-Some rules can be enforced by JSON Schema.
-
-Others require cross-record validation.
-
-| Rule | JSON Schema | Conformance Validator |
-|---|---:|---:|
-| Required Trace fields | Yes | No |
-| Allowed Trace type | Yes | No |
-| UUID format | Yes | No |
-| Risk range | Yes | No |
-| Non-empty authority_used | Yes | No |
-| Referenced Trace exists | No | Yes |
-| Trace/Receipt actor match | No | Yes |
-| Authority before action | No | Yes |
-| Scope permits action | No | Yes |
-| No self-escalation | No | Yes |
-| No Receipt after denial | No | Yes |
-| Successful action has Receipt | No | Yes |
-| Duplicate action Receipt detection | No | Yes |
-
-This separation MUST remain explicit.
-
-JSON Schema MUST NOT be treated as proof of full Zero Network conformance.
-
----
-
-# 11. Conformance Validator Responsibilities
-
-A future semantic validator SHOULD evaluate at least:
+Another is:
 
 ```text
-1. participant existence
-2. Trace existence
-3. Trace → Receipt linkage
-4. actor consistency
-5. authority decision ordering
-6. authority scope compatibility
-7. denial / execution consistency
-8. execution / Receipt consistency
-9. duplicate Receipt detection
-10. causal reference sanity
+Trace / Receipt
+↓
+Region Flow
+↓
+Cycle
+↓
+Circulation Observation
+↓
+Vortex Candidate
 ```
 
-A validator MAY operate on:
-
-- individual event bundles,
-- append-only logs,
-- database records,
-- streamed events,
-- signed audit packages,
-- or exported conformance fixtures.
+Higher-order objects SHOULD remain reconstructable from lower-order evidence where the implementation exposes that evidence.
 
 ---
 
-# 12. Event Bundle Model
+# 48. Observation vs Interpretation
 
-For testing purposes, a future conformance fixture MAY group related events into one bundle.
-
-Example conceptual structure:
-
-```json
-{
-  "participant": {},
-  "traces": [],
-  "authority_events": [],
-  "actions": [],
-  "receipts": []
-}
-```
-
-This bundle format is NOT normative in v0.1.
-
-It is reserved as a possible test representation for future validators.
-
----
-
-# 13. Trust Boundary
-
-Zero Network conformance does not mean that every participant is trustworthy.
-
-It means that behavior is constrained enough to be:
+Across v0.1–v0.6, implementations SHOULD preserve the distinction between:
 
 ```text
-identifiable
-+
-observable
-+
-authority-bounded
-+
-evidenced
+observable or directly calculated data
 ```
 
-Therefore:
+and:
 
 ```text
-Conformance ≠ Trust
-
-Conformance = Minimum structural accountability
+interpretive classification
 ```
 
-This distinction is fundamental.
+Examples:
+
+```text
+trace_count
+receipt_count
+gradient
+cycle_count
+return_count
+```
+
+are measurements or direct calculations.
+
+Examples:
+
+```text
+rising
+front_candidate
+vortex_candidate
+```
+
+are interpretations.
 
 ---
 
-# 14. Meteorology Compatibility
+# 49. Candidate Principle
 
-The conformance rules intentionally preserve data needed for future field-level observation.
+The following hierarchy is intentional:
+
+```text
+Boundary Gradient
+↓
+Front Candidate
+```
+
+not:
+
+```text
+Boundary Gradient
+↓
+Confirmed Front
+```
+
+and:
+
+```text
+Circulation
+↓
+Vortex Candidate
+```
+
+not:
+
+```text
+Circulation
+↓
+Storm
+```
+
+The conformance system SHOULD reject unsupported escalation of certainty.
+
+---
+
+# 50. Human Authority Boundary
+
+Conformance results are observational and structural.
+
+A successful classifier MUST NOT itself create authority to:
+
+- stop an agent,
+- revoke permissions,
+- block transactions,
+- isolate a Region,
+- rewrite policy,
+- terminate a service,
+- or perform external intervention.
+
+Any such action belongs to an independent authority layer.
+
+---
+
+# 51. Missing Data Principle
+
+Across all field and meteorological layers:
+
+```text
+missing
+≠
+zero
+```
+
+and:
+
+```text
+unknown
+≠
+safe
+```
+
+and:
+
+```text
+partial
+≠
+complete
+```
+
+Implementations SHOULD preserve uncertainty rather than silently substituting values.
+
+---
+
+# 52. Provenance Principle
+
+Where provenance fields are available, they SHOULD make higher-level results traceable to lower-level evidence.
+
+Examples:
+
+```text
+Receipt
+→ Trace
+```
+
+```text
+Field Delta
+→ Field Snapshots
+```
+
+```text
+Front Candidate
+→ Boundary Gradients
+```
+
+```text
+Vortex Candidate
+→ Circulation Observations
+```
+
+---
+
+# 53. Duplicate Identifier Principle
+
+Within one evaluated fixture or conformance scope, identifiers used as authoritative references SHOULD be unique.
+
+Examples include:
+
+```text
+trace_id
+receipt_id
+authority_id
+snapshot_id
+delta_id
+flow_id
+gradient_id
+candidate_id
+circulation_id
+cycle_id
+```
+
+Duplicate identifiers make evidence reconstruction ambiguous and SHOULD be rejected where validators support the check.
+
+---
+
+# 54. Time Principle
+
+Across versions, causal and observational objects SHOULD preserve forward time.
+
+Examples:
+
+```text
+authority issued
+≤
+action
+≤
+receipt
+```
+
+```text
+window_start
+<
+window_end
+≤
+generated_at
+```
+
+and:
+
+```text
+from_snapshot
+<
+to_snapshot
+```
+
+where applicable.
+
+---
+
+# 55. Direction Principle
+
+Where movement is modeled, direction MUST remain explicit.
+
+Examples:
+
+```text
+A → B
+≠
+B → A
+```
+
+and:
+
+```text
+A → B → C → A
+≠
+A → C → B → A
+```
+
+Direction is part of the evidence.
+
+---
+
+# 56. Reconstruction Principle
+
+Whenever a specification defines a deterministic calculation, conformance SHOULD reproduce it rather than trust the reported result.
+
+Examples:
+
+```text
+Field Delta
+Boundary Gradient
+authority_friction
+flow_rate
+return_rate
+weighted Front score
+weighted Vortex score
+```
+
+---
+
+# 57. Validator Index
+
+| Version | Schema Validator | Semantic Validator |
+|---|---|---|
+| v0.1 | `scripts/validate.py` | `scripts/validate_conformance.py` |
+| v0.2 | `scripts/validate_v0_2.py` | `scripts/validate_conformance_v0_2.py` |
+| v0.3 | `scripts/validate_v0_3.py` | `scripts/validate_conformance_v0_3.py` |
+| v0.4 | `scripts/validate_v0_4.py` | `scripts/validate_conformance_v0_4.py` |
+| v0.5 | `scripts/validate_v0_5.py` | `scripts/validate_conformance_v0_5.py` |
+| v0.6 | `scripts/validate_v0_6.py` | `scripts/validate_conformance_v0_6.py` |
+
+---
+
+# 58. Schema Index
+
+```text
+v0.1
+schemas/trace-v0.1.schema.json
+schemas/receipt-v0.1.schema.json
+
+v0.2
+schemas/authority-v0.2.schema.json
+
+v0.3
+schemas/field-snapshot-v0.3.schema.json
+
+v0.4
+schemas/field-delta-v0.4.schema.json
+schemas/region-flow-v0.4.schema.json
+
+v0.5
+schemas/boundary-gradient-v0.5.schema.json
+schemas/front-candidate-v0.5.schema.json
+
+v0.6
+schemas/circulation-observation-v0.6.schema.json
+schemas/vortex-candidate-v0.6.schema.json
+```
+
+---
+
+# 59. Fixture Index
+
+Each version SHOULD maintain:
+
+```text
+examples/vX.Y/pass/
+examples/vX.Y/fail/
+examples/vX.Y/conformance/pass/
+examples/vX.Y/conformance/fail/
+```
+
+The meaning is:
+
+```text
+pass/
+→ expected to satisfy JSON Schema
+
+fail/
+→ expected to fail JSON Schema
+
+conformance/pass/
+→ expected to satisfy semantic rules
+
+conformance/fail/
+→ expected to violate at least one semantic rule
+```
+
+---
+
+# 60. CI Expectations
+
+The GitHub Actions workflow SHOULD run every current validator.
+
+Conceptually:
+
+```text
+v0.1 Schema
+↓
+v0.1 Conformance
+↓
+v0.2 Schema
+↓
+v0.2 Conformance
+↓
+v0.3 Schema
+↓
+v0.3 Conformance
+↓
+v0.4 Schema
+↓
+v0.4 Conformance
+↓
+v0.5 Schema
+↓
+v0.5 Conformance
+↓
+v0.6 Schema
+↓
+v0.6 Conformance
+```
+
+Any unexpected PASS or FAIL SHOULD cause the workflow to fail.
+
+---
+
+# 61. Backward Compatibility
+
+Later versions SHOULD NOT silently redefine earlier version semantics.
 
 For example:
 
 ```text
-Trace density
-→ activity pressure
-
-authority_request density
-→ permission pressure
-
-Receipt density
-→ effective activity
-
-authority_used
-→ effective authority distribution
-
-parent_trace_id
-→ causal flow
-
-region
-→ observation zone
+v0.6
 ```
 
-AI Meteorology is not part of v0.1 conformance.
-
-v0.1 only ensures that future Meteorology layers can observe meaningful network behavior.
-
----
-
-# 15. Royalty and Contribution Compatibility
-
-Receipt records MAY later support:
-
-- attribution,
-- resource accounting,
-- contribution accounting,
-- royalty distribution,
-- value redistribution,
-- and provenance.
-
-However, v0.1 MUST NOT infer economic value merely from the existence of a Receipt.
-
-A Receipt proves an effective action.
-
-It does not automatically determine the value of that action.
-
----
-
-# 16. Minimum Conformance Statement
-
-An AI Zero Network v0.1 implementation is semantically conforming when:
+MUST NOT silently alter:
 
 ```text
-Every effective actor is identifiable.
-
-Every meaningful network-visible event is traceable.
-
-Every external effect is preceded by valid authority.
-
-Every successful external effect leaves an authoritative Receipt.
-
-No denied or failed action is represented as successful history.
+v0.2 authority semantics
 ```
 
-In compact form:
+without explicit versioning.
 
-> **Identity → Trace → Authority → Effect → Receipt**
-
-This sequence is the minimum semantic backbone of AI Zero Network v0.1.
+Versioned schemas and specifications are treated as explicit contracts.
 
 ---
 
-# 17. Zero Network Rule
+# 62. Extension Principle
 
-The entire v0.1 conformance model can be reduced to five prohibitions:
+Implementations MAY add higher-order metadata or implementation-specific analysis.
 
-> **No invisible actor.**  
-> **No invisible transition.**  
-> **No authorityless effect.**  
-> **No false Receipt.**  
-> **No receiptless effect.**
+However, they SHOULD NOT claim AI Zero Network conformance for behavior that contradicts the normative rules of the declared version.
 
-Everything beyond this belongs to higher layers.
+Extensions SHOULD preserve:
+
+```text
+evidence
+version boundaries
+provenance
+candidate semantics
+authority separation
+```
+
+---
+
+# 63. Current Conformance Boundary
+
+The current core validates:
+
+```text
+Existence
+Authority
+Observation
+Dynamics
+Boundary
+Circulation
+```
+
+It does not yet define conformance for:
+
+```text
+Storm Candidate
+Forecast
+Trajectory Prediction
+Forecast Confidence
+Storm Lifecycle
+Automated Intervention
+```
+
+These concepts remain outside v0.1–v0.6.
+
+---
+
+# 64. Observation Core vs Prediction Layer
+
+The architectural boundary is:
+
+```text
+v0.1–v0.6
+Observation
++
+Reconstruction
++
+Structural Meteorology
+```
+
+versus future work:
+
+```text
+Prediction
++
+Forecasting
++
+Higher-order Meteorology
+```
+
+This separation is intentional.
+
+---
+
+# 65. Unified Conformance Law
+
+Across v0.1–v0.6:
+
+> **No claim without structure.**  
+> **No effect without evidence.**  
+> **No authority without provenance.**  
+> **No measurement without observable basis.**  
+> **No derived value without a method.**  
+> **No candidate without supporting evidence.**  
+> **No candidate presented as certainty.**  
+> **No observation silently becomes authority.**
+
+---
+
+# 66. Minimal Accountability Chain
+
+The complete core can be viewed as:
+
+```text
+Actor
+↓
+Trace
+↓
+Authority
+↓
+Action
+↓
+Receipt
+↓
+Field
+↓
+Dynamics
+↓
+Boundary
+↓
+Circulation
+↓
+Candidate Interpretation
+```
+
+Each layer adds structure.
+
+Each higher layer SHOULD remain accountable to the evidence beneath it.
+
+---
+
+# 67. Current Milestone
+
+AI Zero Network v0.1–v0.6 currently forms the:
+
+# Observation & Structural Meteorology Core
+
+Its conformance system covers:
+
+- JSON Schema validation,
+- PASS/FAIL examples,
+- semantic fixtures,
+- reconstructable calculations,
+- provenance checks,
+- reference integrity,
+- temporal checks,
+- directional checks,
+- candidate-evidence checks,
+- and GitHub Actions enforcement.
+
+This document serves as the common conformance index for that core.
+
+---
+
+# 68. Final Principle
+
+AI Zero Network conformance does not ask:
+
+> **Did the AI appear intelligent?**
+
+It asks:
+
+> **Can the structure around its actions and network behavior be reconstructed and checked?**
+
+That is the purpose of conformance in AI Zero Network.
