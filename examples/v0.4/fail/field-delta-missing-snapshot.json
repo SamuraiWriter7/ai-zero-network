@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.4",
+  "delta_id": "55555555-5555-4555-8555-555555555555",
+  "region": "finance-02",
+  "from_snapshot": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "changes": {
+    "trace_count": 10
+  }
+}
