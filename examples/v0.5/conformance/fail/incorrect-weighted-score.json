@@ -1,0 +1,54 @@
+{
+  "gradients": [
+    {
+      "schema_version": "0.5",
+      "gradient_id": "11111111-bbbb-4111-8111-111111111111",
+      "boundary_id": "research-01__tooling-01",
+      "region_a": "research-01",
+      "region_b": "tooling-01",
+      "metric": "activity_pressure",
+      "value_a": 0.9,
+      "value_b": 0.3,
+      "gradient": 0.6,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T05:10:00+09:00",
+      "window_end": "2026-10-04T05:15:00+09:00"
+    },
+    {
+      "schema_version": "0.5",
+      "gradient_id": "22222222-bbbb-4222-8222-222222222222",
+      "boundary_id": "research-01__tooling-01",
+      "region_a": "research-01",
+      "region_b": "tooling-01",
+      "metric": "authority_friction",
+      "value_a": 0.2,
+      "value_b": 0.7,
+      "gradient": 0.5,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T05:10:00+09:00",
+      "window_end": "2026-10-04T05:15:00+09:00"
+    }
+  ],
+  "front_candidates": [
+    {
+      "schema_version": "0.5",
+      "candidate_id": "cccccccc-9999-4999-8999-cccccccccccc",
+      "boundary_id": "research-01__tooling-01",
+      "region_a": "research-01",
+      "region_b": "tooling-01",
+      "gradient_refs": [
+        "11111111-bbbb-4111-8111-111111111111",
+        "22222222-bbbb-4222-8222-222222222222"
+      ],
+      "classification": "front_candidate",
+      "method": "gradient_weighted_score_v1",
+      "window_start": "2026-10-04T05:10:00+09:00",
+      "window_end": "2026-10-04T05:15:00+09:00",
+      "weights": {
+        "activity_pressure": 0.5,
+        "authority_friction": 0.5
+      },
+      "score": 0.8
+    }
+  ]
+}
