@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.4",
+  "flow_id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee",
+  "source_region": "research-01",
+  "target_region": "tooling-01",
+  "window_start": "2026-10-04T01:40:00+09:00",
+  "window_end": "2026-10-04T01:45:00+09:00",
+  "observations": {
+    "trace_count": 30,
+    "receipt_count": 4
+  },
+  "derived": {
+    "flow_rate": {
+      "value": 6
+    }
+  }
+}
