@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee",
+  "region": "tooling-02",
+  "window_start": "2026-10-03T10:55:00+09:00",
+  "window_end": "2026-10-03T11:00:00+09:00",
+  "observations": {
+    "trace_count": 20,
+    "receipt_count": 4,
+    "authority_request_count": 2,
+    "authority_grant_count": 1,
+    "authority_deny_count": 1,
+    "active_agent_count": 5
+  },
+  "provenance": {
+    "generated_at": "2026-10-03T11:00:01+09:00",
+    "collector_id": "collector-tooling-02",
+    "source_record_count": 27,
+    "source_digest": "not-a-valid-sha256"
+  }
+}
