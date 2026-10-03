@@ -1,0 +1,29 @@
+{
+  "snapshots": [],
+  "field_deltas": [],
+  "region_flows": [
+    {
+      "flow_id": "55555555-aaaa-4555-8555-555555555555",
+      "source_region": "finance-01",
+      "target_region": "payment-01",
+      "window_start": "2026-10-04T01:40:00+09:00",
+      "window_end": "2026-10-04T01:45:00+09:00",
+      "observations": {
+        "trace_count": 50,
+        "receipt_count": 10
+      },
+      "derived": {
+        "flow_rate": {
+          "value": 10,
+          "method": "trace_count/per_minute"
+        }
+      },
+      "provenance": {
+        "generated_at": "2026-10-04T01:45:02+09:00",
+        "collector_id": "collector-finance-payment-01",
+        "source_record_count": 60,
+        "source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ]
+}
