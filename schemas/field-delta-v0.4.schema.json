@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ai-zero-network/schemas/field-delta-v0.4.schema.json",
+  "title": "AI Zero Network Field Delta v0.4",
+  "description": "Schema for measurable change between two compatible Field Snapshots in AI Zero Network v0.4. Raw changes are kept separate from interpreted trends.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "schema_version",
+    "delta_id",
+    "region",
+    "from_snapshot",
+    "to_snapshot",
+    "changes"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.4"
+    },
+
+    "delta_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this Field Delta."
+    },
+
+    "region": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "description": "Region whose field state is being compared."
+    },
+
+    "from_snapshot": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the earlier source Field Snapshot."
+    },
+
+    "to_snapshot": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Identifier of the later source Field Snapshot."
+    },
+
+    "changes": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+
+      "properties": {
+        "trace_count": {
+          "type": "integer",
+          "description": "Change in trace_count. May be positive, zero, or negative."
+        },
+
+        "receipt_count": {
+          "type": "integer",
+          "description": "Change in receipt_count."
+        },
+
+        "authority_request_count": {
+          "type": "integer",
+          "description": "Change in authority_request_count."
+        },
+
+        "authority_grant_count": {
+          "type": "integer",
+          "description": "Change in authority_grant_count."
+        },
+
+        "authority_deny_count": {
+          "type": "integer",
+          "description": "Change in authority_deny_count."
+        },
+
+        "active_agent_count": {
+          "type": "integer",
+          "description": "Change in active_agent_count."
+        },
+
+        "incoming_trace_count": {
+          "type": "integer",
+          "description": "Change in incoming_trace_count."
+        },
+
+        "outgoing_trace_count": {
+          "type": "integer",
+          "description": "Change in outgoing_trace_count."
+        },
+
+        "cross_region_trace_count": {
+          "type": "integer",
+          "description": "Change in cross_region_trace_count."
+        },
+
+        "causal_edge_count": {
+          "type": "integer",
+          "description": "Change in causal_edge_count."
+        },
+
+        "resources": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+
+          "properties": {
+            "tokens": {
+              "type": "integer",
+              "description": "Change in token consumption."
+            },
+
+            "cost": {
+              "type": "number",
+              "description": "Change in implementation-defined cost."
+            },
+
+            "compute_units": {
+              "type": "number",
+              "description": "Change in implementation-defined compute usage."
+            }
+          }
+        }
+      }
+    },
+
+    "derived": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "activity_pressure": {
+          "$ref": "#/$defs/trendMetric"
+        },
+
+        "effective_pressure": {
+          "$ref": "#/$defs/trendMetric"
+        },
+
+        "authority_friction": {
+          "$ref": "#/$defs/trendMetric"
+        }
+      }
+    },
+
+    "comparison": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "window_compatibility": {
+          "type": "string",
+          "enum": [
+            "equal_duration",
+            "normalized",
+            "unknown"
+          ],
+          "description": "How observation-window comparability was handled."
+        },
+
+        "normalization_method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Normalization method when unequal windows are compared."
+        },
+
+        "delta_state": {
+          "type": "string",
+          "enum": [
+            "complete",
+            "partial",
+            "provisional"
+          ],
+          "description": "Reliability/completeness state of the resulting delta."
+        }
+      },
+
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "window_compatibility": {
+                "const": "normalized"
+              }
+            },
+            "required": [
+              "window_compatibility"
+            ]
+          },
+          "then": {
+            "required": [
+              "normalization_method"
+            ]
+          }
+        }
+      ]
+    },
+
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "analyzer_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+
+        "source_snapshot_refs": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+
+        "source_digest": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      }
+    }
+  },
+
+  "$defs": {
+    "trendMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from",
+        "to",
+        "trend",
+        "method"
+      ],
+
+      "properties": {
+        "from": {
+          "type": "number"
+        },
+
+        "to": {
+          "type": "number"
+        },
+
+        "trend": {
+          "type": "string",
+          "enum": [
+            "rising",
+            "falling",
+            "stable"
+          ]
+        },
+
+        "method": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Method used to interpret the trend."
+        }
+      }
+    }
+  }
+}
