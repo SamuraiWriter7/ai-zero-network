@@ -1,0 +1,49 @@
+{
+  "snapshots": [
+    {
+      "snapshot_id": "11111111-aaaa-4111-8111-111111111111",
+      "region": "finance-01",
+      "window_start": "2026-10-04T01:00:00+09:00",
+      "window_end": "2026-10-04T01:05:00+09:00",
+      "observations": {
+        "trace_count": 100,
+        "receipt_count": 10,
+        "authority_request_count": 12,
+        "authority_grant_count": 8,
+        "authority_deny_count": 4,
+        "active_agent_count": 15
+      }
+    },
+    {
+      "snapshot_id": "22222222-aaaa-4222-8222-222222222222",
+      "region": "finance-01",
+      "window_start": "2026-10-04T01:05:00+09:00",
+      "window_end": "2026-10-04T01:10:00+09:00",
+      "observations": {
+        "trace_count": 160,
+        "receipt_count": 24,
+        "authority_request_count": 29,
+        "authority_grant_count": 17,
+        "authority_deny_count": 12,
+        "active_agent_count": 24
+      }
+    }
+  ],
+  "field_deltas": [
+    {
+      "delta_id": "aaaaaaaa-1111-4111-8111-aaaaaaaaaaaa",
+      "region": "finance-01",
+      "from_snapshot": "11111111-aaaa-4111-8111-111111111111",
+      "to_snapshot": "22222222-aaaa-4222-8222-222222222222",
+      "changes": {
+        "trace_count": 60,
+        "receipt_count": 14,
+        "authority_request_count": 17,
+        "authority_grant_count": 9,
+        "authority_deny_count": 8,
+        "active_agent_count": 9
+      }
+    }
+  ],
+  "region_flows": []
+}
