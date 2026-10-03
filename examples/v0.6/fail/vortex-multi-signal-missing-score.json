@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.6",
+  "candidate_id": "bbbbbbbb-2222-4222-8222-bbbbbbbbbbbb",
+  "circulation_refs": [
+    "55555555-5555-4555-8555-555555555555"
+  ],
+  "classification": "vortex_candidate",
+  "method": "multi_signal_vortex_candidate_v1",
+  "window_start": "2026-10-04T07:20:00+09:00",
+  "window_end": "2026-10-04T07:25:00+09:00",
+  "weights": {
+    "cycle_count": 0.5,
+    "return_count": 0.5
+  }
+}
