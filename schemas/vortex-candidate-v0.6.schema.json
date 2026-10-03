@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/ai-zero-network/schemas/vortex-candidate-v0.6.schema.json",
+  "title": "AI Zero Network Vortex Candidate v0.6",
+  "description": "Schema for provisional vortex-like classifications derived from circulation evidence in AI Zero Network v0.6.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "schema_version",
+    "candidate_id",
+    "circulation_refs",
+    "classification",
+    "method",
+    "window_start",
+    "window_end"
+  ],
+
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "0.6"
+    },
+
+    "candidate_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this Vortex Candidate."
+    },
+
+    "circulation_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "Circulation Observation identifiers used as evidence."
+    },
+
+    "classification": {
+      "type": "string",
+      "const": "vortex_candidate",
+      "description": "v0.6 permits only provisional vortex classification."
+    },
+
+    "method": {
+      "type": "string",
+      "enum": [
+        "persistent_circulation_score_v1",
+        "cycle_density_threshold_v1",
+        "multi_signal_vortex_candidate_v1"
+      ],
+      "description": "Explicit classifier method used to derive the Vortex Candidate."
+    },
+
+    "window_start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start of the Vortex Candidate analysis interval."
+    },
+
+    "window_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "End of the Vortex Candidate analysis interval."
+    },
+
+    "candidate_state": {
+      "type": "string",
+      "enum": [
+        "complete",
+        "partial",
+        "provisional"
+      ],
+      "description": "Completeness state of the evidence used to classify this candidate."
+    },
+
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Implementation-defined classifier confidence or score, not calibrated probability unless separately specified."
+    },
+
+    "strength": {
+      "type": "string",
+      "enum": [
+        "weak",
+        "moderate",
+        "strong"
+      ],
+      "description": "Optional structural Vortex Candidate strength. Conformance requires explicit thresholds when used."
+    },
+
+    "thresholds": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      },
+      "description": "Explicit threshold configuration used by threshold-based classification methods."
+    },
+
+    "weights": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0
+      },
+      "description": "Explicit non-negative signal weights used by weighted or multi-signal methods."
+    },
+
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Optional reconstructable classifier score."
+    },
+
+    "core_regions": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "description": "Principal Regions participating in the circulation core."
+    },
+
+    "persistence": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of qualifying windows supporting persistence."
+        },
+
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Observed duration of the vortex-like candidate structure."
+        },
+
+        "state": {
+          "type": "string",
+          "enum": [
+            "appeared",
+            "persisted",
+            "strengthened",
+            "weakened",
+            "dissipated"
+          ],
+          "description": "Descriptive candidate lifecycle state."
+        }
+      }
+    },
+
+    "signals": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "cycle_count": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "return_count": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "cycle_density": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "circulation_strength": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "persistence_count": {
+          "type": "number",
+          "minimum": 0
+        },
+
+        "persistence_duration_seconds": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+
+      "description": "Optional normalized or directly comparable circulation signals used by the classifier."
+    },
+
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+
+        "analyzer_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+
+        "source_circulation_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+
+        "source_flow_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+
+        "source_trace_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+
+        "source_digest": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      }
+    }
+  },
+
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "method": {
+            "const": "cycle_density_threshold_v1"
+          }
+        },
+        "required": [
+          "method"
+        ]
+      },
+      "then": {
+        "required": [
+          "thresholds"
+        ]
+      }
+    },
+
+    {
+      "if": {
+        "properties": {
+          "method": {
+            "const": "persistent_circulation_score_v1"
+          }
+        },
+        "required": [
+          "method"
+        ]
+      },
+      "then": {
+        "required": [
+          "score"
+        ]
+      }
+    },
+
+    {
+      "if": {
+        "properties": {
+          "method": {
+            "const": "multi_signal_vortex_candidate_v1"
+          }
+        },
+        "required": [
+          "method"
+        ]
+      },
+      "then": {
+        "required": [
+          "weights",
+          "score"
+        ]
+      }
+    },
+
+    {
+      "if": {
+        "required": [
+          "strength"
+        ]
+      },
+      "then": {
+        "required": [
+          "thresholds"
+        ]
+      }
+    }
+  ]
+}
