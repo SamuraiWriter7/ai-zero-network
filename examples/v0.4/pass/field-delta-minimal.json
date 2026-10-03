@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.4",
+  "delta_id": "11111111-1111-4111-8111-111111111111",
+  "region": "finance-01",
+  "from_snapshot": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "to_snapshot": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+  "changes": {
+    "trace_count": 60,
+    "receipt_count": 14,
+    "authority_request_count": 17,
+    "authority_grant_count": 9,
+    "authority_deny_count": 8,
+    "active_agent_count": 9
+  }
+}
