@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "33333333-3333-4333-8333-333333333333",
+  "region": "tooling-01",
+  "window_start": "2026-10-03T10:15:00+09:00",
+  "window_end": "2026-10-03T10:20:00+09:00",
+  "observation_state": "provisional",
+  "observations": {
+    "trace_count": 84,
+    "receipt_count": 19,
+    "authority_request_count": 7,
+    "authority_grant_count": 5,
+    "authority_deny_count": 2,
+    "active_agent_count": 11,
+    "incoming_trace_count": 14,
+    "outgoing_trace_count": 17,
+    "cross_region_trace_count": 6,
+    "causal_edge_count": 72,
+    "resources": {
+      "tokens": 28400,
+      "cost": 1.84,
+      "compute_units": 93.4
+    }
+  }
+}
