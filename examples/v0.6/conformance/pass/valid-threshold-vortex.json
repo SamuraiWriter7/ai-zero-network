@@ -1,0 +1,42 @@
+{
+  "circulations": [
+    {
+      "circulation_id": "33333333-aaaa-4333-8333-333333333333",
+      "window_start": "2026-10-04T07:20:00+09:00",
+      "window_end": "2026-10-04T07:25:00+09:00",
+      "region_refs": [
+        "planner-01",
+        "executor-01",
+        "reviewer-01"
+      ],
+      "cycle_count": 8,
+      "return_count": 12,
+      "derived": {
+        "cycle_density": {
+          "value": 0.68,
+          "method": "normalized_cycle_density_v1"
+        }
+      }
+    }
+  ],
+  "vortex_candidates": [
+    {
+      "candidate_id": "dddddddd-1111-4111-8111-dddddddddddd",
+      "circulation_refs": [
+        "33333333-aaaa-4333-8333-333333333333"
+      ],
+      "classification": "vortex_candidate",
+      "method": "cycle_density_threshold_v1",
+      "window_start": "2026-10-04T07:20:00+09:00",
+      "window_end": "2026-10-04T07:25:00+09:00",
+      "thresholds": {
+        "cycle_density": 0.6
+      },
+      "core_regions": [
+        "planner-01",
+        "executor-01",
+        "reviewer-01"
+      ]
+    }
+  ]
+}
