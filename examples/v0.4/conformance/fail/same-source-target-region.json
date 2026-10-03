@@ -1,0 +1,16 @@
+{
+  "snapshots": [],
+  "field_deltas": [],
+  "region_flows": [
+    {
+      "flow_id": "77777777-bbbb-4777-8777-777777777777",
+      "source_region": "finance-01",
+      "target_region": "finance-01",
+      "window_start": "2026-10-04T04:00:00+09:00",
+      "window_end": "2026-10-04T04:05:00+09:00",
+      "observations": {
+        "trace_count": 20
+      }
+    }
+  ]
+}
