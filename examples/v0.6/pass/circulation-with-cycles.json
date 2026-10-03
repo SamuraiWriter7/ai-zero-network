@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.6",
+  "circulation_id": "22222222-2222-4222-8222-222222222222",
+  "window_start": "2026-10-04T06:10:00+09:00",
+  "window_end": "2026-10-04T06:15:00+09:00",
+  "region_refs": [
+    "planner-01",
+    "executor-01",
+    "reviewer-01"
+  ],
+  "cycle_count": 5,
+  "return_count": 8,
+  "observation_state": "complete",
+  "cycle_method": "simple_cycle_count_v1",
+  "cycles": [
+    {
+      "cycle_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+      "path": [
+        "planner-01",
+        "executor-01",
+        "reviewer-01",
+        "planner-01"
+      ],
+      "occurrence_count": 3
+    },
+    {
+      "cycle_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+      "path": [
+        "planner-01",
+        "reviewer-01",
+        "planner-01"
+      ],
+      "occurrence_count": 2
+    }
+  ],
+  "derived": {
+    "cycle_density": {
+      "value": 0.42,
+      "method": "normalized_cycle_density_v1"
+    },
+    "return_rate": {
+      "value": 1.6,
+      "method": "return_count/per_minute"
+    },
+    "circulation_strength": {
+      "value": 0.58,
+      "method": "normalized_cycle_return_score_v1"
+    }
+  },
+  "persistence": {
+    "count": 3,
+    "duration_seconds": 900,
+    "state": "persisted"
+  }
+}
