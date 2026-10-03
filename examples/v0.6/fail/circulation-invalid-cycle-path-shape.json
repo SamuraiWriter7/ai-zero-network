@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.6",
+  "circulation_id": "88888888-8888-4888-8888-888888888888",
+  "window_start": "2026-10-04T06:50:00+09:00",
+  "window_end": "2026-10-04T06:55:00+09:00",
+  "region_refs": [
+    "planner-01",
+    "executor-01"
+  ],
+  "cycle_count": 1,
+  "return_count": 1,
+  "cycles": [
+    {
+      "cycle_id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+      "path": [
+        "planner-01",
+        "executor-01"
+      ],
+      "occurrence_count": 1
+    }
+  ]
+}
