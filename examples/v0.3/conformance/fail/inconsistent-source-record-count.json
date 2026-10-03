@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.3",
+  "snapshot_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaa11",
+  "region": "document-02",
+  "window_start": "2026-10-03T11:30:00+09:00",
+  "window_end": "2026-10-03T11:35:00+09:00",
+  "observations": {
+    "trace_count": 30,
+    "receipt_count": 8,
+    "authority_request_count": 6,
+    "authority_grant_count": 4,
+    "authority_deny_count": 2,
+    "active_agent_count": 7
+  },
+  "provenance": {
+    "generated_at": "2026-10-03T11:35:02+09:00",
+    "collector_id": "collector-document-02",
+    "source_record_count": 10,
+    "source_digest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  }
+}
