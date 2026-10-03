@@ -1,0 +1,48 @@
+{
+  "participants": [
+    {
+      "agent_id": "human-admin-001"
+    },
+    {
+      "agent_id": "agent-coordinator-001"
+    },
+    {
+      "agent_id": "agent-reader-001"
+    }
+  ],
+  "authorities": [
+    {
+      "authority_id": "55555555-5555-4555-8555-555555555555",
+      "requester_id": "agent-coordinator-001",
+      "issuer_id": "human-admin-001",
+      "subject_id": "agent-coordinator-001",
+      "scope": [
+        "read:document",
+        "write:document"
+      ],
+      "decision": "allow",
+      "source_type": "human",
+      "issued_at": "2026-10-03T08:00:00+09:00",
+      "expires_at": "2026-10-03T10:00:00+09:00",
+      "revoked_at": null,
+      "delegation_parent": null
+    },
+    {
+      "authority_id": "66666666-6666-4666-8666-666666666666",
+      "requester_id": "agent-reader-001",
+      "issuer_id": "agent-coordinator-001",
+      "subject_id": "agent-reader-001",
+      "scope": [
+        "read:document"
+      ],
+      "decision": "allow",
+      "source_type": "delegated",
+      "issued_at": "2026-10-03T08:15:00+09:00",
+      "expires_at": "2026-10-03T09:00:00+09:00",
+      "revoked_at": null,
+      "delegation_parent": "55555555-5555-4555-8555-555555555555"
+    }
+  ],
+  "actions": [],
+  "receipts": []
+}
