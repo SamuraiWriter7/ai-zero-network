@@ -1,0 +1,22 @@
+{
+  "snapshots": [],
+  "field_deltas": [],
+  "region_flows": [
+    {
+      "flow_id": "99999999-bbbb-4999-8999-999999999999",
+      "source_region": "research-01",
+      "target_region": "tooling-01",
+      "window_start": "2026-10-04T04:20:00+09:00",
+      "window_end": "2026-10-04T04:25:00+09:00",
+      "observations": {
+        "trace_count": 30
+      },
+      "provenance": {
+        "generated_at": "2026-10-04T04:24:30+09:00",
+        "collector_id": "collector-research-tooling",
+        "source_record_count": 30,
+        "source_digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  ]
+}
