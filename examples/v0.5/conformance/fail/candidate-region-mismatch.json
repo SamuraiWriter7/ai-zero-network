@@ -1,0 +1,37 @@
+{
+  "gradients": [
+    {
+      "schema_version": "0.5",
+      "gradient_id": "dddddddd-aaaa-4ddd-8ddd-dddddddddddd",
+      "boundary_id": "finance-01__safety-01",
+      "region_a": "finance-01",
+      "region_b": "safety-01",
+      "metric": "activity_pressure",
+      "value_a": 0.8,
+      "value_b": 0.2,
+      "gradient": 0.6,
+      "method": "absolute_difference",
+      "window_start": "2026-10-04T04:40:00+09:00",
+      "window_end": "2026-10-04T04:45:00+09:00"
+    }
+  ],
+  "front_candidates": [
+    {
+      "schema_version": "0.5",
+      "candidate_id": "ffffffff-6666-4666-8666-ffffffffffff",
+      "boundary_id": "finance-01__safety-01",
+      "region_a": "finance-01",
+      "region_b": "payment-01",
+      "gradient_refs": [
+        "dddddddd-aaaa-4ddd-8ddd-dddddddddddd"
+      ],
+      "classification": "front_candidate",
+      "method": "single_metric_threshold_v1",
+      "window_start": "2026-10-04T04:40:00+09:00",
+      "window_end": "2026-10-04T04:45:00+09:00",
+      "thresholds": {
+        "activity_pressure": 0.5
+      }
+    }
+  ]
+}
